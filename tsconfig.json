@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    /* Language & emit */
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "moduleDetection": "force",
+    "jsx": "react-jsx",
+    "useDefineForClassFields": true,
+
+    /* tsup owns emit; tsc is used for type-checking only. */
+    "noEmit": true,
+    "declaration": true,
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+
+    /* Strictness */
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+
+    /* Paths — available to Vite/Storybook. Library source under src/ uses
+       relative imports only, so the published build never depends on aliasing. */
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+
+    "types": ["vite/client", "node"]
+  },
+  // `.storybook` is spelled out as an explicit glob: TypeScript's wildcard
+  // include silently skips dot-directories.
+  "include": ["src", "dev", "*.config.ts", ".storybook/**/*.ts", ".storybook/**/*.tsx"]
+}

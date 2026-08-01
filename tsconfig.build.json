@@ -1,0 +1,28 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    /* The published build must not depend on path aliases — library source uses
+       relative imports only. Dropping `paths` also stops tsup's declaration step
+       from injecting the deprecated `baseUrl`. */
+    "paths": {},
+
+    /* tsup's declaration worker injects the (TS6-deprecated) `baseUrl` option
+       unconditionally. This is TypeScript's documented escape hatch and only
+       applies to the build config — `tsc --noEmit` never sets baseUrl.
+       Remove once tsup stops injecting it. See https://aka.ms/ts6 */
+    "ignoreDeprecations": "6.0",
+
+    "types": ["node"],
+    "noEmit": false,
+    "declaration": true,
+    "emitDeclarationOnly": true
+  },
+  /* Only library source ships. Stories, tests and the dev harness are excluded. */
+  "include": ["src"],
+  "exclude": [
+    "src/**/*.stories.tsx",
+    "src/**/*.stories.ts",
+    "src/**/*.test.ts",
+    "src/**/*.test.tsx"
+  ]
+}

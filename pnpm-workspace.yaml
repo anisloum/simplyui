@@ -1,0 +1,7 @@
+# Single-package repo — this file exists only because pnpm 11 moved its
+# settings here out of package.json. No `packages:` key on purpose.
+allowBuilds:
+  # Optional native file watcher; Storybook falls back to polling without it.
+  '@parcel/watcher': false
+  # esbuild backs both tsup and Vite and needs its postinstall to place a binary.
+  esbuild: true

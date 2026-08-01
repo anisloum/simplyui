@@ -1,0 +1,30 @@
+/**
+ * SimplyUI — Tailwind entry & theme mapping
+ * =========================================
+ * This is the stylesheet entry point. It pulls in Tailwind, the raw design
+ * tokens, and maps those tokens onto Tailwind's theme scale.
+ *
+ * Tailwind v4 is configured in CSS (there is no tailwind.config.js). The
+ * `@theme inline` block below is where design tokens become utilities:
+ * declaring `--color-background: var(--background)` generates `bg-background`,
+ * `text-background`, `border-background`, and friends.
+ */
+
+@import 'tailwindcss';
+@import './tokens.css';
+
+/* Tell Tailwind where to scan for class names (relative to this file). */
+@source '../**/*.{ts,tsx}';
+
+/* Class-based dark mode: `<html class="dark">` toggles the theme. */
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  /* TODO: tokens injected here — map tokens.css variables onto Tailwind's scale.
+     e.g.
+       --color-background: var(--background);
+       --color-foreground: var(--foreground);
+       --radius-md: var(--radius);
+       --font-sans: var(--font-sans);
+  */
+}

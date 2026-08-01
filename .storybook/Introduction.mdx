@@ -1,0 +1,26 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+
+<Meta title="Introduction" />
+
+# SimplyUI
+
+Accessible, themeable React primitives built from scratch — no Radix, no React Aria.
+
+This page exists so Storybook has something to render while the library is still
+scaffolding. **It is not a component.** Delete it once real stories land.
+
+## Status
+
+Scaffolding only. No components, no tokens, no theme values yet.
+
+- `src/components/` — empty, awaiting component specs
+- `src/styles/tokens.css` — empty, awaiting design tokens
+- `src/styles/theme.css` — Tailwind entry, `@theme inline` mapping is a TODO
+
+## Conventions
+
+Every component ships a `*.stories.tsx` file next to its source. Stories are
+picked up from `src/**/*.stories.tsx`. The a11y addon runs axe-core against each
+story and is configured to **error** on violations — see `.storybook/preview.ts`.
+
+See `CONTRIBUTING.md` for the folder layout and how to add a component.
