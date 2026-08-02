@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import { ArrowRight, Download, Heart, Plus, Settings, Trash2 } from 'lucide-react'
 import type { ReactNode } from 'react'
 
-import { Button } from './button'
+import { Button, type ButtonProps } from './button'
 import { type ButtonSize, type ButtonVariant } from './button.styles'
 
 const VARIANTS: ButtonVariant[] = ['solid', 'outline', 'ghost']
@@ -225,13 +225,54 @@ const forcedStates: Record<ButtonVariant, { hover: string; pressed: string }> = 
     pressed: 'bg-primary-active',
   },
   outline: {
-    hover: 'bg-primary-wash-hover',
-    pressed: 'border-primary-active bg-primary-wash-active text-primary-active',
+    hover: 'bg-primary-wash-hover text-primary-fg-hover',
+    pressed: 'border-primary-fg-active bg-primary-wash-active text-primary-fg-active',
   },
   ghost: {
-    hover: 'bg-primary-wash-hover',
-    pressed: 'bg-primary-wash-active text-primary-active',
+    hover: 'bg-primary-wash-hover text-primary-fg-hover',
+    pressed: 'bg-primary-wash-active text-primary-fg-active',
   },
+}
+
+function StatesGrid({ args }: { args: Partial<ButtonProps> }) {
+  return (
+    <div className="grid grid-cols-[auto_repeat(3,minmax(0,1fr))] items-center gap-4">
+      <span aria-hidden="true" />
+      {VARIANTS.map((variant) => (
+        <span key={variant} className="text-xs text-text-default">
+          {variant}
+        </span>
+      ))}
+
+      <span className="text-xs text-text-default">default / live</span>
+      {VARIANTS.map((variant) => (
+        <Button key={variant} {...args} variant={variant}>
+          {variant}
+        </Button>
+      ))}
+
+      <span className="text-xs text-text-default">hover (forced)</span>
+      {VARIANTS.map((variant) => (
+        <Button key={variant} {...args} variant={variant} className={forcedStates[variant].hover}>
+          {variant}
+        </Button>
+      ))}
+
+      <span className="text-xs text-text-default">pressed (forced)</span>
+      {VARIANTS.map((variant) => (
+        <Button key={variant} {...args} variant={variant} className={forcedStates[variant].pressed}>
+          {variant}
+        </Button>
+      ))}
+
+      <span className="text-xs text-text-default">disabled</span>
+      {VARIANTS.map((variant) => (
+        <Button key={variant} {...args} variant={variant} disabled>
+          {variant}
+        </Button>
+      ))}
+    </div>
+  )
 }
 
 export const StatesReference: Story = {
@@ -241,47 +282,7 @@ export const StatesReference: Story = {
         Row 1 is live — hover and press it. Rows 2 and 3 are the same token combinations pinned open
         via <code>className</code> so the matrix can be compared against Figma.
       </p>
-      <div className="grid grid-cols-[auto_repeat(3,minmax(0,1fr))] items-center gap-4">
-        <span aria-hidden="true" />
-        {VARIANTS.map((variant) => (
-          <span key={variant} className="text-xs text-text-default">
-            {variant}
-          </span>
-        ))}
-
-        <span className="text-xs text-text-default">default / live</span>
-        {VARIANTS.map((variant) => (
-          <Button key={variant} {...args} variant={variant}>
-            {variant}
-          </Button>
-        ))}
-
-        <span className="text-xs text-text-default">hover (forced)</span>
-        {VARIANTS.map((variant) => (
-          <Button key={variant} {...args} variant={variant} className={forcedStates[variant].hover}>
-            {variant}
-          </Button>
-        ))}
-
-        <span className="text-xs text-text-default">pressed (forced)</span>
-        {VARIANTS.map((variant) => (
-          <Button
-            key={variant}
-            {...args}
-            variant={variant}
-            className={forcedStates[variant].pressed}
-          >
-            {variant}
-          </Button>
-        ))}
-
-        <span className="text-xs text-text-default">disabled</span>
-        {VARIANTS.map((variant) => (
-          <Button key={variant} {...args} variant={variant} disabled>
-            {variant}
-          </Button>
-        ))}
-      </div>
+      <StatesGrid args={args} />
     </div>
   ),
 }
@@ -306,6 +307,12 @@ export const DarkMode: Story = {
         <Button {...args} variant="ghost" isLoading>
           Loading
         </Button>
+      </Stack>
+      {/* The same forced-state matrix as StatesReference. Dark mode resolves a
+          different foreground ramp, so its hover/pressed states need their own
+          visual QA and their own axe pass rather than inheriting the light one. */}
+      <Stack label="states (rows 2 and 3 forced)">
+        <StatesGrid args={args} />
       </Stack>
     </div>
   ),

@@ -37,16 +37,20 @@ const variantStyles: Record<ButtonVariant, string> = {
     'not-disabled:active:bg-primary-active',
     'disabled:bg-primary-disabled disabled:text-text-on-primary',
   ),
+  // `primary-fg`, not `primary-default`: these two render primary as a label
+  // and a border on a neutral surface, so they follow the foreground ramp
+  // (which lightens in dark mode) rather than the fill ramp (which does not).
+  // The label steps with the wash so it stays legible as the wash deepens.
   outline: cn(
-    'border-primary-default bg-transparent text-primary-default',
-    'not-disabled:hover:bg-primary-wash-hover',
-    'not-disabled:active:border-primary-active not-disabled:active:bg-primary-wash-active not-disabled:active:text-primary-active',
+    'border-primary-fg bg-transparent text-primary-fg',
+    'not-disabled:hover:bg-primary-wash-hover not-disabled:hover:text-primary-fg-hover',
+    'not-disabled:active:border-primary-fg-active not-disabled:active:bg-primary-wash-active not-disabled:active:text-primary-fg-active',
     'disabled:border-border-disabled disabled:bg-transparent disabled:text-text-disabled',
   ),
   ghost: cn(
-    'border-transparent bg-transparent text-primary-default',
-    'not-disabled:hover:bg-primary-wash-hover',
-    'not-disabled:active:bg-primary-wash-active not-disabled:active:text-primary-active',
+    'border-transparent bg-transparent text-primary-fg',
+    'not-disabled:hover:bg-primary-wash-hover not-disabled:hover:text-primary-fg-hover',
+    'not-disabled:active:bg-primary-wash-active not-disabled:active:text-primary-fg-active',
     'disabled:border-transparent disabled:bg-transparent disabled:text-text-disabled',
   ),
 }

@@ -42,14 +42,29 @@
   /* --- divider ---------------------------------------------------- */
   --color-divider-default: var(--primitive-white-300);
 
-  /* --- primary (intent) ------------------------------------------ */
+  /* --- primary FILL (intent) -------------------------------------
+     The label on top of these is always --color-text-on-primary, so the ramp
+     has to DARKEN on interaction. blue-400 was the old hover and only reached
+     3.04:1 under that label. */
   --color-primary-default:  var(--primitive-blue-300);
-  --color-primary-hover:    var(--primitive-blue-400);
-  --color-primary-active:   var(--primitive-blue-200);
+  --color-primary-hover:    var(--primitive-blue-200);
+  --color-primary-active:   var(--primitive-blue-100);
   --color-primary-disabled: var(--primitive-white-100);
 
-  /* --- primary wash (outline/text hover+press — NEUTRAL grey) ---- */
-  --color-primary-wash-hover:  var(--primitive-white-200);
+  /* --- primary FOREGROUND ----------------------------------------
+     Primary used as a label or border on a neutral surface, rather than as a
+     fill. Split from the fill ramp because the two move in opposite directions
+     in dark mode: the fill stays put so its light label keeps contrast, while
+     the foreground has to lighten to stay legible on a dark surface. */
+  --color-primary-fg:        var(--primitive-blue-300);
+  --color-primary-fg-hover:  var(--primitive-blue-200);
+  --color-primary-fg-active: var(--primitive-blue-100);
+
+  /* --- primary wash (outline/ghost hover+press — NEUTRAL grey) ----
+     Hue stays neutral by design. Lightness moved: the old white-200 hover was
+     dark enough that a blue label on it hit 2.77:1, and it was also darker
+     than the pressed wash, so pressing a button made it look less active. */
+  --color-primary-wash-hover:  var(--primitive-white-400);
   --color-primary-wash-active: var(--primitive-white-300);
 
   /* --- feedback -------------------------------------------------- */
@@ -91,6 +106,16 @@
   --color-border-disabled: var(--primitive-black-200);
 
   --color-divider-default: var(--primitive-white-300);
+
+  /* Primary as a foreground lightens here — blue-300 only reaches 3.73:1 on
+     the dark surface. Same treatment already applied to --color-text-link.
+     The pressed step runs past the end of the blue ramp, so it lands on
+     white-500; blue-500 on the pressed wash would only make 4.41:1.
+     NOTE: the primary FILL tokens are deliberately NOT overridden here — the
+     fill stays blue in both modes so its light label keeps its contrast. */
+  --color-primary-fg:        var(--primitive-blue-400);
+  --color-primary-fg-hover:  var(--primitive-blue-500);
+  --color-primary-fg-active: var(--primitive-white-500);
 
   /* Wash stays neutral grey but moves to the dark end of the ramp — a light
      wash on a dark surface reads as an inverted highlight. */
