@@ -1,0 +1,122 @@
+/* =====================================================================
+   PRIMITIVES  —  raw design values, mode-independent
+   ---------------------------------------------------------------------
+   Do NOT reference these directly in components. They exist only to be
+   aliased by the semantic layer (semantic.css). Scale direction:
+   100 = DARKEST, 500 = LIGHTEST  (Tailwind-conventional).
+   ===================================================================== */
+
+:root {
+  /* --- color: blue ------------------------------------------------ */
+  --primitive-blue-100: #093072;
+  --primitive-blue-200: #0e4ebb;
+  --primitive-blue-300: #1261ea;
+  --primitive-blue-400: #4d88ef;
+  --primitive-blue-500: #9cbdf6;
+
+  /* --- color: white (tinted neutral, light end) ------------------- */
+  --primitive-white-100: #9aa0ab;
+  --primitive-white-200: #b4bbc6;
+  --primitive-white-300: #ccd3df;
+  --primitive-white-400: #dee6f4;
+  --primitive-white-500: #e9f1ff;
+
+  /* --- color: black (tinted neutral, dark end) ------------------- */
+  --primitive-black-100: #7e8695;
+  --primitive-black-200: #5c687b;
+  --primitive-black-300: #444e5f;
+  --primitive-black-400: #1f2633;
+  --primitive-black-500: #010916;
+
+  /* --- color: green ---------------------------------------------- */
+  --primitive-green-100: #009331;
+  --primitive-green-200: #01c442;
+  --primitive-green-300: #16fe63;
+  --primitive-green-400: #66ff99;
+  --primitive-green-500: #a0ffc0;
+
+  /* --- color: yellow --------------------------------------------- */
+  --primitive-yellow-100: #a17901;
+  --primitive-yellow-200: #d09c02;
+  --primitive-yellow-300: #fbbd02;
+  --primitive-yellow-400: #fecf41;
+  --primitive-yellow-500: #ffe493;
+
+  /* --- color: red ------------------------------------------------ */
+  --primitive-red-100: #790000;
+  --primitive-red-200: #af0101;
+  --primitive-red-300: #e80101;
+  --primitive-red-400: #ff6969;
+  --primitive-red-500: #ffacac;
+
+  /* --- typography ------------------------------------------------- */
+  --primitive-font-sans: "Hanken Grotesk", system-ui, sans-serif;
+  --primitive-font-display: "Lexend", system-ui, sans-serif;
+
+  --primitive-text-xs: 0.875rem;   /* 14px */
+  --primitive-text-sm: 1rem;       /* 16px */
+  --primitive-text-base: 1.125rem; /* 18px */
+  --primitive-text-md: 1.25rem;    /* 20px */
+  --primitive-text-lg: 1.5rem;     /* 24px */
+  --primitive-text-xl: 2rem;       /* 32px */
+  --primitive-text-2xl: 2.5rem;    /* 40px */
+  --primitive-text-3xl: 3rem;      /* 48px */
+  --primitive-text-4xl: 4rem;      /* 64px */
+
+  --primitive-weight-thin: 100;
+  --primitive-weight-extralight: 200;
+  --primitive-weight-light: 300;
+  --primitive-weight-regular: 400;
+  --primitive-weight-medium: 500;
+  --primitive-weight-semibold: 600;
+  --primitive-weight-bold: 700;
+  --primitive-weight-extrabold: 800;
+  --primitive-weight-black: 900;
+
+  /* --- spacing (preserved exactly from Figma; space-0 = 4px) ------ */
+  --primitive-space-0: 0.25rem; /* 4  */
+  --primitive-space-1: 0.5rem;  /* 8  */
+  --primitive-space-2: 0.75rem; /* 12 */
+  --primitive-space-3: 1rem;    /* 16 */
+  --primitive-space-4: 1.5rem;  /* 24 */
+  --primitive-space-5: 2rem;    /* 32 */
+  --primitive-space-6: 2.5rem;  /* 40 */
+  --primitive-space-7: 3rem;    /* 48 */
+  --primitive-space-8: 3.5rem;  /* 56 */
+  --primitive-space-9: 4rem;    /* 64 */
+  --primitive-space-10: 4.5rem; /* 72 */
+  --primitive-space-11: 5rem;   /* 80 */
+
+  /* --- radius (from Button Radius spec + defaults) --------------- */
+  --primitive-radius-none: 0;
+  --primitive-radius-control: 5px; /* buttons, inputs, selects  */
+  --primitive-radius-md: 12px;     /* cards, containers, modals */
+  --primitive-radius-full: 9999px; /* pills, avatars            */
+
+  /* --- sizing (control heights from Button Scale) --------------- */
+  --primitive-size-control-sm: 2rem;    /* 32px */
+  --primitive-size-control-md: 2.75rem; /* 44px */
+  --primitive-size-control-lg: 3.25rem; /* 52px */
+  --primitive-size-icon-sm: 1rem;       /* 16px */
+  --primitive-size-icon-md: 1.25rem;    /* 20px */
+  --primitive-size-icon-lg: 1.5rem;     /* 24px */
+
+  /* --- shadow (dual drop-shadow, from spec) --------------------- */
+  --primitive-shadow-none: none;
+  --primitive-shadow-sm:
+    -1px -1px 4px 1px rgba(1, 9, 22, 0.1),
+     1px  1px 4px 1px rgba(1, 9, 22, 0.1);
+  --primitive-shadow-md:
+    -2px -2px 8px 1.5px rgba(1, 9, 22, 0.12),
+     2px  2px 8px 1.5px rgba(1, 9, 22, 0.12);
+  --primitive-shadow-lg:
+    -3px -3px 12px 2px rgba(1, 9, 22, 0.14),
+     3px  3px 12px 2px rgba(1, 9, 22, 0.14);
+
+  /* --- z-index (engineering stack) ------------------------------ */
+  --primitive-z-dropdown: 1000;
+  --primitive-z-sticky: 1100;
+  --primitive-z-modal: 1300;
+  --primitive-z-toast: 1400;
+  --primitive-z-tooltip: 1500;
+}

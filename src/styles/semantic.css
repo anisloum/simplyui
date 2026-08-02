@@ -1,0 +1,95 @@
+/* =====================================================================
+   SEMANTIC  —  role-based tokens with light/dark modes
+   ---------------------------------------------------------------------
+   These are the ONLY tokens components should reference (via the Tailwind
+   utilities generated in theme.css). Every value aliases a primitive.
+   Light = :root, Dark = .dark (only overrides that differ are listed).
+   ===================================================================== */
+
+:root {
+  /* --- backgrounds ----------------------------------------------- */
+  --color-bg-default:  var(--primitive-white-500);
+  --color-bg-subtle:   var(--primitive-white-400);
+  --color-bg-muted:    var(--primitive-white-100);
+  --color-bg-disabled: var(--primitive-white-100);
+
+  /* --- surface (raised: cards, dropdowns, popovers, modals) ------ */
+  --color-surface-default: var(--primitive-white-500);
+
+  /* --- text (muted/subtle FIXED: subtle darker, muted lighter) --- */
+  --color-text-default:     var(--primitive-black-500);
+  --color-text-subtle:      var(--primitive-white-100);
+  --color-text-muted:       var(--primitive-white-300);
+  --color-text-inactive:    var(--primitive-white-100);
+  --color-text-disabled:    var(--primitive-black-300);
+  --color-text-inverse:     var(--primitive-white-500);
+  --color-text-placeholder: var(--primitive-black-100); /* AA-pragmatic (3.23:1) */
+  --color-text-link:        var(--primitive-blue-300);
+
+  /* --- border ----------------------------------------------------- */
+  --color-border-default:  var(--primitive-black-100);
+  --color-border-subtle:   var(--primitive-black-100); /* light: falls back to default */
+  --color-border-disabled: var(--primitive-black-200);
+  --color-border-focused:  var(--primitive-blue-300);
+  --color-border-success:  var(--primitive-green-300);
+  --color-border-warning:  var(--primitive-yellow-300);
+  --color-border-error:    var(--primitive-red-400);
+
+  /* --- divider ---------------------------------------------------- */
+  --color-divider-default: var(--primitive-white-300);
+
+  /* --- primary (intent) ------------------------------------------ */
+  --color-primary-default:  var(--primitive-blue-300);
+  --color-primary-hover:    var(--primitive-blue-400);
+  --color-primary-active:   var(--primitive-blue-200);
+  --color-primary-disabled: var(--primitive-white-100);
+
+  /* --- primary wash (outline/text hover+press — NEUTRAL grey) ---- */
+  --color-primary-wash-hover:  var(--primitive-white-200);
+  --color-primary-wash-active: var(--primitive-white-300);
+
+  /* --- feedback -------------------------------------------------- */
+  --color-success-default: var(--primitive-green-300);
+  --color-success-subtle:  var(--primitive-green-400);
+  --color-success-accent:  var(--primitive-green-200);
+  --color-warning-default: var(--primitive-yellow-300);
+  --color-warning-subtle:  var(--primitive-yellow-400);
+  --color-warning-accent:  var(--primitive-yellow-200);
+  --color-error-default:   var(--primitive-red-300);
+  --color-error-subtle:    var(--primitive-red-400);
+  --color-error-accent:    var(--primitive-red-200);
+
+  /* --- overlay / focus ring -------------------------------------- */
+  --color-overlay-default: rgba(1, 9, 22, 0.5);
+  --color-ring-default:    var(--primitive-blue-300);
+}
+
+/* --- DARK MODE: only overrides that differ from :root ------------ */
+.dark {
+  --color-bg-default:  var(--primitive-black-500);
+  --color-bg-subtle:   var(--primitive-black-400);
+  --color-bg-muted:    var(--primitive-white-100);
+  --color-bg-disabled: var(--primitive-white-100);
+
+  --color-surface-default: var(--primitive-black-400);
+
+  --color-text-default:     var(--primitive-white-500);
+  --color-text-subtle:      var(--primitive-white-100);
+  --color-text-muted:       var(--primitive-black-300);
+  --color-text-inactive:    var(--primitive-white-100);
+  --color-text-disabled:    var(--primitive-white-300);
+  --color-text-inverse:     var(--primitive-black-500);
+  --color-text-placeholder: var(--primitive-white-100);
+  --color-text-link:        var(--primitive-blue-400);
+
+  --color-border-default:  var(--primitive-white-200);
+  --color-border-subtle:   var(--primitive-black-200); /* dark: cards get a real border */
+  --color-border-disabled: var(--primitive-black-200);
+
+  --color-divider-default: var(--primitive-white-300);
+
+  --color-primary-wash-hover:  var(--primitive-white-300);
+  --color-primary-wash-active: var(--primitive-white-200);
+
+  --color-overlay-default: rgba(1, 9, 22, 0.6);
+}

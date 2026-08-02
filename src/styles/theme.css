@@ -1,30 +1,161 @@
-/**
- * SimplyUI — Tailwind entry & theme mapping
- * =========================================
- * This is the stylesheet entry point. It pulls in Tailwind, the raw design
- * tokens, and maps those tokens onto Tailwind's theme scale.
- *
- * Tailwind v4 is configured in CSS (there is no tailwind.config.js). The
- * `@theme inline` block below is where design tokens become utilities:
- * declaring `--color-background: var(--background)` generates `bg-background`,
- * `text-background`, `border-background`, and friends.
- */
+/* =====================================================================
+   THEME  —  Tailwind v4 entry point
+   ---------------------------------------------------------------------
+   Import order matters: primitives → semantic → @theme mapping.
+   This is the file your app / Storybook imports (e.g. `import "./theme.css"`).
+   The @theme block maps semantic CSS vars to Tailwind's design-token
+   namespaces, which is what generates utilities like `bg-default`,
+   `text-link`, `rounded-control`, `shadow-md`, `p-4`, etc.
+   ===================================================================== */
 
-@import 'tailwindcss';
-@import './tokens.css';
+@import "tailwindcss";
 
-/* Tell Tailwind where to scan for class names (relative to this file). */
-@source '../**/*.{ts,tsx}';
+/* Load token layers (paths relative to this file within src/styles/) */
+@import "./primitives.css";
+@import "./semantic.css";
 
-/* Class-based dark mode: `<html class="dark">` toggles the theme. */
-@custom-variant dark (&:is(.dark *));
+/* Enable class-based dark mode: `.dark` on a parent toggles dark tokens.
+   (In Tailwind v4, this custom variant replaces the v3 darkMode config.) */
+@custom-variant dark (&:where(.dark, .dark *));
 
-@theme inline {
-  /* TODO: tokens injected here — map tokens.css variables onto Tailwind's scale.
-     e.g.
-       --color-background: var(--background);
-       --color-foreground: var(--foreground);
-       --radius-md: var(--radius);
-       --font-sans: var(--font-sans);
-  */
+@theme {
+  /* -----------------------------------------------------------------
+     COLORS  → utilities: bg-*, text-*, border-*, ring-*, etc.
+     Only SEMANTIC tokens are exposed here (primitives stay private).
+     Naming: --color-{group}-{role} → e.g. `bg-primary-default`,
+     `text-default`, `border-error`.
+     ----------------------------------------------------------------- */
+
+  /* backgrounds */
+  --color-bg-default: var(--color-bg-default);
+  --color-bg-subtle: var(--color-bg-subtle);
+  --color-bg-muted: var(--color-bg-muted);
+  --color-bg-disabled: var(--color-bg-disabled);
+
+  /* surface */
+  --color-surface-default: var(--color-surface-default);
+
+  /* text */
+  --color-text-default: var(--color-text-default);
+  --color-text-subtle: var(--color-text-subtle);
+  --color-text-muted: var(--color-text-muted);
+  --color-text-inactive: var(--color-text-inactive);
+  --color-text-disabled: var(--color-text-disabled);
+  --color-text-inverse: var(--color-text-inverse);
+  --color-text-placeholder: var(--color-text-placeholder);
+  --color-text-link: var(--color-text-link);
+
+  /* border */
+  --color-border-default: var(--color-border-default);
+  --color-border-subtle: var(--color-border-subtle);
+  --color-border-disabled: var(--color-border-disabled);
+  --color-border-focused: var(--color-border-focused);
+  --color-border-success: var(--color-border-success);
+  --color-border-warning: var(--color-border-warning);
+  --color-border-error: var(--color-border-error);
+
+  /* divider */
+  --color-divider-default: var(--color-divider-default);
+
+  /* primary + wash */
+  --color-primary-default: var(--color-primary-default);
+  --color-primary-hover: var(--color-primary-hover);
+  --color-primary-active: var(--color-primary-active);
+  --color-primary-disabled: var(--color-primary-disabled);
+  --color-primary-wash-hover: var(--color-primary-wash-hover);
+  --color-primary-wash-active: var(--color-primary-wash-active);
+
+  /* feedback */
+  --color-success-default: var(--color-success-default);
+  --color-success-subtle: var(--color-success-subtle);
+  --color-success-accent: var(--color-success-accent);
+  --color-warning-default: var(--color-warning-default);
+  --color-warning-subtle: var(--color-warning-subtle);
+  --color-warning-accent: var(--color-warning-accent);
+  --color-error-default: var(--color-error-default);
+  --color-error-subtle: var(--color-error-subtle);
+  --color-error-accent: var(--color-error-accent);
+
+  /* overlay + ring */
+  --color-overlay-default: var(--color-overlay-default);
+  --color-ring-default: var(--color-ring-default);
+
+  /* -----------------------------------------------------------------
+     TYPOGRAPHY  → font-sans / font-display, text-xs … text-4xl,
+     font-thin … font-black
+     ----------------------------------------------------------------- */
+  --font-sans: var(--primitive-font-sans);
+  --font-display: var(--primitive-font-display);
+
+  --text-xs: var(--primitive-text-xs);
+  --text-sm: var(--primitive-text-sm);
+  --text-base: var(--primitive-text-base);
+  --text-md: var(--primitive-text-md);
+  --text-lg: var(--primitive-text-lg);
+  --text-xl: var(--primitive-text-xl);
+  --text-2xl: var(--primitive-text-2xl);
+  --text-3xl: var(--primitive-text-3xl);
+  --text-4xl: var(--primitive-text-4xl);
+
+  --font-weight-thin: var(--primitive-weight-thin);
+  --font-weight-extralight: var(--primitive-weight-extralight);
+  --font-weight-light: var(--primitive-weight-light);
+  --font-weight-regular: var(--primitive-weight-regular);
+  --font-weight-medium: var(--primitive-weight-medium);
+  --font-weight-semibold: var(--primitive-weight-semibold);
+  --font-weight-bold: var(--primitive-weight-bold);
+  --font-weight-extrabold: var(--primitive-weight-extrabold);
+  --font-weight-black: var(--primitive-weight-black);
+
+  /* -----------------------------------------------------------------
+     SPACING  → p-*, m-*, gap-*, w-*, h-*  (space-0 … space-11)
+     NOTE: this REPLACES Tailwind's default numeric spacing with the
+     design-system scale. `p-0` = 4px here by design (no true-zero token);
+     use the literal `p-[0]` if a hard 0 is ever needed.
+     ----------------------------------------------------------------- */
+  --spacing-0: var(--primitive-space-0);
+  --spacing-1: var(--primitive-space-1);
+  --spacing-2: var(--primitive-space-2);
+  --spacing-3: var(--primitive-space-3);
+  --spacing-4: var(--primitive-space-4);
+  --spacing-5: var(--primitive-space-5);
+  --spacing-6: var(--primitive-space-6);
+  --spacing-7: var(--primitive-space-7);
+  --spacing-8: var(--primitive-space-8);
+  --spacing-9: var(--primitive-space-9);
+  --spacing-10: var(--primitive-space-10);
+  --spacing-11: var(--primitive-space-11);
+
+  /* control heights / icon sizes → h-control-md, size-icon-sm, etc. */
+  --spacing-control-sm: var(--primitive-size-control-sm);
+  --spacing-control-md: var(--primitive-size-control-md);
+  --spacing-control-lg: var(--primitive-size-control-lg);
+  --spacing-icon-sm: var(--primitive-size-icon-sm);
+  --spacing-icon-md: var(--primitive-size-icon-md);
+  --spacing-icon-lg: var(--primitive-size-icon-lg);
+
+  /* -----------------------------------------------------------------
+     RADIUS  → rounded-control, rounded-md, rounded-full
+     ----------------------------------------------------------------- */
+  --radius-none: var(--primitive-radius-none);
+  --radius-control: var(--primitive-radius-control);
+  --radius-md: var(--primitive-radius-md);
+  --radius-full: var(--primitive-radius-full);
+
+  /* -----------------------------------------------------------------
+     SHADOW  → shadow-sm, shadow-md, shadow-lg
+     ----------------------------------------------------------------- */
+  --shadow-none: var(--primitive-shadow-none);
+  --shadow-sm: var(--primitive-shadow-sm);
+  --shadow-md: var(--primitive-shadow-md);
+  --shadow-lg: var(--primitive-shadow-lg);
+
+  /* -----------------------------------------------------------------
+     Z-INDEX  → z-dropdown, z-modal, z-toast, z-tooltip
+     ----------------------------------------------------------------- */
+  --z-index-dropdown: var(--primitive-z-dropdown);
+  --z-index-sticky: var(--primitive-z-sticky);
+  --z-index-modal: var(--primitive-z-modal);
+  --z-index-toast: var(--primitive-z-toast);
+  --z-index-tooltip: var(--primitive-z-tooltip);
 }
