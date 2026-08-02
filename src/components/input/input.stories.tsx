@@ -28,7 +28,11 @@ function Stack({ label, children }: { label?: string; children: ReactNode }) {
  * an inline arrow makes `meta`'s inferred type unnameable under `satisfies`.
  */
 const withFormWidth: Decorator = (Story) => (
-  <div className="max-w-2xl">
+  // `bg-bg-default` matters for more than looks: Storybook's canvas is pure
+  // white, but the light surface token is #e9f1ff. Without it the a11y addon
+  // measures every contrast ratio against the wrong background and reports
+  // results that are slightly better than what ships.
+  <div className="max-w-2xl bg-bg-default p-4">
     <Story />
   </div>
 )

@@ -24,3 +24,10 @@ export {
   type InputStatus,
   type InputValidationStatus,
 } from './components/input'
+export {
+  Textarea,
+  type TextareaProps,
+  type TextareaResize,
+  type TextareaStatus,
+  type TextareaValidationStatus,
+} from './components/textarea'
