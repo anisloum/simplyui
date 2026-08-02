@@ -42,6 +42,7 @@
   --color-text-inactive: var(--color-text-inactive);
   --color-text-disabled: var(--color-text-disabled);
   --color-text-inverse: var(--color-text-inverse);
+  --color-text-on-primary: var(--color-text-on-primary);
   --color-text-placeholder: var(--color-text-placeholder);
   --color-text-link: var(--color-text-link);
 

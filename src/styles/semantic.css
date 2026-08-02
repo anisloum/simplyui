@@ -25,6 +25,10 @@
   --color-text-inverse:     var(--primitive-white-500);
   --color-text-placeholder: var(--primitive-black-100); /* AA-pragmatic (3.23:1) */
   --color-text-link:        var(--primitive-blue-300);
+  /* Label ON a filled primary surface (solid buttons, badges). Deliberately
+     NOT text-inverse: the primary fill stays blue in both modes, so its label
+     must stay light in both modes. No .dark override — that is the point. */
+  --color-text-on-primary:  var(--primitive-white-500);
 
   /* --- border ----------------------------------------------------- */
   --color-border-default:  var(--primitive-black-100);
@@ -88,8 +92,10 @@
 
   --color-divider-default: var(--primitive-white-300);
 
-  --color-primary-wash-hover:  var(--primitive-white-300);
-  --color-primary-wash-active: var(--primitive-white-200);
+  /* Wash stays neutral grey but moves to the dark end of the ramp — a light
+     wash on a dark surface reads as an inverted highlight. */
+  --color-primary-wash-hover:  var(--primitive-black-400);
+  --color-primary-wash-active: var(--primitive-black-300);
 
   --color-overlay-default: rgba(1, 9, 22, 0.6);
 }

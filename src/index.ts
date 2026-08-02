@@ -7,6 +7,14 @@
 
 // Shared utilities
 export { cn, type ClassValue } from './lib/cn'
+export { Slot, type SlotProps } from './lib/slot'
 
-// TODO: components re-exported here, e.g.
-// export { Button, type ButtonProps } from './components/button'
+// Components
+export {
+  Button,
+  buttonStyles,
+  type ButtonProps,
+  type ButtonSize,
+  type ButtonStyleOptions,
+  type ButtonVariant,
+} from './components/button'
