@@ -29,6 +29,11 @@
   --primitive-black-500: #010916;
 
   /* --- color: green ---------------------------------------------- */
+  /* -50 is a darker step added below the original 100, same hue scaled toward
+     black. The 100-500 ramp is tuned for dark surfaces: even green-100 only
+     reaches 3.54:1 on the light surface, so no existing step could carry
+     status TEXT at AA. Used for light-mode feedback foregrounds only. */
+  --primitive-green-50: #006b23;
   --primitive-green-100: #009331;
   --primitive-green-200: #01c442;
   --primitive-green-300: #16fe63;
@@ -36,6 +41,9 @@
   --primitive-green-500: #a0ffc0;
 
   /* --- color: yellow --------------------------------------------- */
+  /* Same reasoning as green-50. A yellow that clears 4.5:1 on a light surface
+     is always olive — that is a property of the hue, not a mistake. */
+  --primitive-yellow-50: #785900;
   --primitive-yellow-100: #a17901;
   --primitive-yellow-200: #d09c02;
   --primitive-yellow-300: #fbbd02;

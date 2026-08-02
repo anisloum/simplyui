@@ -11,14 +11,16 @@
   --color-bg-default:  var(--primitive-white-500);
   --color-bg-subtle:   var(--primitive-white-400);
   --color-bg-muted:    var(--primitive-white-100);
-  --color-bg-disabled: var(--primitive-white-100);
+  --color-bg-disabled: var(--primitive-white-300);
 
   /* --- surface (raised: cards, dropdowns, popovers, modals) ------ */
   --color-surface-default: var(--primitive-white-500);
 
   /* --- text (muted/subtle FIXED: subtle darker, muted lighter) --- */
   --color-text-default:     var(--primitive-black-500);
-  --color-text-subtle:      var(--primitive-white-100);
+  /* subtle is body copy (helper text), so it needs the full 4.5:1. white-100
+     is lighter than the surface here and only managed 2.31:1. */
+  --color-text-subtle:      var(--primitive-black-200);
   --color-text-muted:       var(--primitive-white-300);
   --color-text-inactive:    var(--primitive-white-100);
   --color-text-disabled:    var(--primitive-black-300);
@@ -35,9 +37,11 @@
   --color-border-subtle:   var(--primitive-black-100); /* light: falls back to default */
   --color-border-disabled: var(--primitive-black-200);
   --color-border-focused:  var(--primitive-blue-300);
-  --color-border-success:  var(--primitive-green-300);
-  --color-border-warning:  var(--primitive-yellow-300);
-  --color-border-error:    var(--primitive-red-400);
+  /* Feedback borders are non-text UI, so 3:1. The 300/400 steps sat at
+     1.20/1.49/2.47 on the light surface — effectively invisible. */
+  --color-border-success:  var(--primitive-green-100);
+  --color-border-warning:  var(--primitive-yellow-200);
+  --color-border-error:    var(--primitive-red-300);
 
   /* --- divider ---------------------------------------------------- */
   --color-divider-default: var(--primitive-white-300);
@@ -78,6 +82,15 @@
   --color-error-subtle:    var(--primitive-red-400);
   --color-error-accent:    var(--primitive-red-200);
 
+  /* --- feedback FOREGROUND ---------------------------------------
+     Feedback used as a status icon or message sitting on the page surface,
+     rather than as a fill. Same split as --color-primary-fg: the *-default
+     steps are tuned for dark surfaces (green-300 is 1.20:1 on the light one),
+     so a foreground needs its own value that flips per mode. */
+  --color-success-fg:      var(--primitive-green-100);
+  --color-warning-fg:      var(--primitive-yellow-200);
+  --color-error-fg:        var(--primitive-red-300);
+
   /* --- overlay / focus ring -------------------------------------- */
   --color-overlay-default: rgba(1, 9, 22, 0.5);
   --color-ring-default:    var(--primitive-blue-300);
@@ -88,7 +101,9 @@
   --color-bg-default:  var(--primitive-black-500);
   --color-bg-subtle:   var(--primitive-black-400);
   --color-bg-muted:    var(--primitive-white-100);
-  --color-bg-disabled: var(--primitive-white-100);
+  /* Was white-100, i.e. identical to light mode — a pale slab on a near-black
+     page, with text-disabled landing on it at 1.75:1. */
+  --color-bg-disabled: var(--primitive-black-400);
 
   --color-surface-default: var(--primitive-black-400);
 
@@ -104,6 +119,16 @@
   --color-border-default:  var(--primitive-white-200);
   --color-border-subtle:   var(--primitive-black-200); /* dark: cards get a real border */
   --color-border-disabled: var(--primitive-black-200);
+  /* Back to the vivid steps here — the darkened light-mode values would be
+     near-invisible against the dark surface. */
+  --color-border-success:  var(--primitive-green-400);
+  --color-border-warning:  var(--primitive-yellow-400);
+  --color-border-error:    var(--primitive-red-400);
+
+  /* red-300 only reaches 4.22:1 on the dark surface; red-400 makes 7.11:1. */
+  --color-success-fg:      var(--primitive-green-400);
+  --color-warning-fg:      var(--primitive-yellow-400);
+  --color-error-fg:        var(--primitive-red-400);
 
   --color-divider-default: var(--primitive-white-300);
 

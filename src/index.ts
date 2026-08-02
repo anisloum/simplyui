@@ -18,3 +18,9 @@ export {
   type ButtonStyleOptions,
   type ButtonVariant,
 } from './components/button'
+export {
+  Input,
+  type InputProps,
+  type InputStatus,
+  type InputValidationStatus,
+} from './components/input'

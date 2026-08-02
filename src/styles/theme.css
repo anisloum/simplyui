@@ -79,6 +79,9 @@
   --color-error-default: var(--color-error-default);
   --color-error-subtle: var(--color-error-subtle);
   --color-error-accent: var(--color-error-accent);
+  --color-success-fg: var(--color-success-fg);
+  --color-warning-fg: var(--color-warning-fg);
+  --color-error-fg: var(--color-error-fg);
 
   /* overlay + ring */
   --color-overlay-default: var(--color-overlay-default);
