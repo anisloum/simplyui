@@ -8,11 +8,12 @@
    `text-link`, `rounded-control`, `shadow-md`, `p-4`, etc.
    ===================================================================== */
 
-@import "tailwindcss";
+@import 'tailwindcss';
 
 /* Load token layers (paths relative to this file within src/styles/) */
-@import "./primitives.css";
-@import "./semantic.css";
+@import './fonts.css';
+@import './primitives.css';
+@import './semantic.css';
 
 /* Enable class-based dark mode: `.dark` on a parent toggles dark tokens.
    (In Tailwind v4, this custom variant replaces the v3 darkMode config.) */
@@ -86,6 +87,8 @@
   --color-success-fg: var(--color-success-fg);
   --color-warning-fg: var(--color-warning-fg);
   --color-error-fg: var(--color-error-fg);
+  --color-neutral-fill: var(--color-neutral-fill);
+  --color-text-on-neutral: var(--color-text-on-neutral);
   --color-success-fill: var(--color-success-fill);
   --color-warning-fill: var(--color-warning-fill);
   --color-error-fill: var(--color-error-fill);
@@ -209,5 +212,16 @@
 
   &::-webkit-scrollbar-thumb:hover {
     background-color: var(--color-text-subtle);
+  }
+}
+
+/* Functional scroll with no visible scrollbar — for the Tabs overflow rail,
+   where the tab row itself is the affordance. Scrolling stays fully available
+   to wheel, drag, touch and keyboard. */
+@utility scrollbar-none {
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
   }
 }

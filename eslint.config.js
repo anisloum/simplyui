@@ -46,9 +46,10 @@ export default tseslint.config(
   // Storybook-specific rules, scoped to story files by the plugin itself.
   ...storybook.configs['flat/recommended'],
 
-  // Config files run in Node and are not covered by the type-aware program.
+  // Config files and build scripts run in Node and are not covered by the
+  // type-aware program.
   {
-    files: ['*.config.{ts,js,mjs}', '.storybook/**/*.{ts,tsx}'],
+    files: ['*.config.{ts,js,mjs}', '.storybook/**/*.{ts,tsx}', 'scripts/**/*.{js,mjs}'],
     languageOptions: { globals: globals.node },
   },
 

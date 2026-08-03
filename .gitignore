@@ -34,3 +34,6 @@ Thumbs.db
 
 # Coverage
 coverage/
+
+# Specification
+specification/

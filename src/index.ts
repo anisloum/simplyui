@@ -17,7 +17,40 @@ export {
   type BadgeSize,
   type BadgeVariant,
 } from './components/badge'
+export {
+  Breadcrumbs,
+  collapseItems,
+  type BreadcrumbItem,
+  type BreadcrumbsProps,
+} from './components/breadcrumbs'
 export { Checkbox, type CheckboxProps } from './components/checkbox'
+export {
+  getPaginationRange,
+  PAGINATION_ELLIPSIS,
+  Pagination,
+  usePaginationRange,
+  type PaginationItem,
+  type PaginationProps,
+  type PaginationRangeOptions,
+} from './components/pagination'
+export {
+  Steps,
+  type Step,
+  type StepsOrientation,
+  type StepsProps,
+  type StepStatus,
+} from './components/steps'
+export {
+  Tab,
+  TabList,
+  TabPanel,
+  Tabs,
+  type TabListProps,
+  type TabPanelProps,
+  type TabProps,
+  type TabsProps,
+  type TabsVariant,
+} from './components/tabs'
 export {
   Radio,
   RadioGroup,

@@ -1,0 +1,34 @@
+/* =====================================================================
+   FONTS  —  self-hosted, bundled with the package
+   ---------------------------------------------------------------------
+   Both files are VARIABLE fonts carrying a wght axis of 100–900, so one
+   file per family covers every weight in the token scale (thin 100 …
+   black 900) — there is no per-weight file to add, and no synthetic
+   bolding.
+
+   The `font-family` names here must match the primitives exactly
+   (`--primitive-font-sans`, `--primitive-font-display`), otherwise the
+   stack silently falls through to system-ui.
+
+   `font-display: swap` renders the fallback immediately and swaps when the
+   file lands, so text is never invisible while the font downloads.
+
+   Paths are relative to this file. It lives in `src/styles`, which is in
+   the package's `files` list, so the .ttf files ship to consumers too.
+   ===================================================================== */
+
+@font-face {
+  font-family: 'Hanken Grotesk';
+  src: url('./fonts/hanken-grotesk.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Lexend';
+  src: url('./fonts/lexend.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}

@@ -8,13 +8,13 @@
 
 :root {
   /* --- backgrounds ----------------------------------------------- */
-  --color-bg-default:  var(--primitive-white-500);
-  --color-bg-subtle:   var(--primitive-white-400);
+  --color-bg-default: var(--primitive-white-500);
+  --color-bg-subtle: var(--primitive-white-400);
   /* Darkened from white-100. This is the Switch's off-track, and the thumb
      (bg-default) sat on it at 2.31:1 — the thumb position is what tells you the
      switch is off, so it needs 3:1. black-100 gets it to 3.23:1 and also makes
      the track edge visible against the page. */
-  --color-bg-muted:    var(--primitive-black-100);
+  --color-bg-muted: var(--primitive-black-100);
   /* Hover step for bg-muted (the Switch's off-track). Neutral, one step darker,
      and still clears 3:1 against the thumb in both modes. */
   --color-bg-muted-hover: var(--primitive-black-200);
@@ -24,31 +24,31 @@
   --color-surface-default: var(--primitive-white-500);
 
   /* --- text (muted/subtle FIXED: subtle darker, muted lighter) --- */
-  --color-text-default:     var(--primitive-black-500);
+  --color-text-default: var(--primitive-black-500);
   /* subtle is body copy (helper text), so it needs the full 4.5:1. white-100
      is lighter than the surface here and only managed 2.31:1. */
-  --color-text-subtle:      var(--primitive-black-200);
-  --color-text-muted:       var(--primitive-white-300);
-  --color-text-inactive:    var(--primitive-white-100);
-  --color-text-disabled:    var(--primitive-black-300);
-  --color-text-inverse:     var(--primitive-white-500);
+  --color-text-subtle: var(--primitive-black-200);
+  --color-text-muted: var(--primitive-white-300);
+  --color-text-inactive: var(--primitive-white-100);
+  --color-text-disabled: var(--primitive-black-300);
+  --color-text-inverse: var(--primitive-white-500);
   --color-text-placeholder: var(--primitive-black-100); /* AA-pragmatic (3.23:1) */
-  --color-text-link:        var(--primitive-blue-300);
+  --color-text-link: var(--primitive-blue-300);
   /* Label ON a filled primary surface (solid buttons, badges). Deliberately
      NOT text-inverse: the primary fill stays blue in both modes, so its label
      must stay light in both modes. No .dark override — that is the point. */
-  --color-text-on-primary:  var(--primitive-white-500);
+  --color-text-on-primary: var(--primitive-white-500);
 
   /* --- border ----------------------------------------------------- */
-  --color-border-default:  var(--primitive-black-100);
-  --color-border-subtle:   var(--primitive-black-100); /* light: falls back to default */
+  --color-border-default: var(--primitive-black-100);
+  --color-border-subtle: var(--primitive-white-300); /* light: falls back to default */
   --color-border-disabled: var(--primitive-black-200);
-  --color-border-focused:  var(--primitive-blue-300);
+  --color-border-focused: var(--primitive-blue-300);
   /* Feedback borders are non-text UI, so 3:1. The 300/400 steps sat at
      1.20/1.49/2.47 on the light surface — effectively invisible. */
-  --color-border-success:  var(--primitive-green-100);
-  --color-border-warning:  var(--primitive-yellow-200);
-  --color-border-error:    var(--primitive-red-300);
+  --color-border-success: var(--primitive-green-100);
+  --color-border-warning: var(--primitive-yellow-200);
+  --color-border-error: var(--primitive-red-300);
 
   /* --- divider ---------------------------------------------------- */
   --color-divider-default: var(--primitive-white-300);
@@ -57,9 +57,9 @@
      The label on top of these is always --color-text-on-primary, so the ramp
      has to DARKEN on interaction. blue-400 was the old hover and only reached
      3.04:1 under that label. */
-  --color-primary-default:  var(--primitive-blue-300);
-  --color-primary-hover:    var(--primitive-blue-200);
-  --color-primary-active:   var(--primitive-blue-100);
+  --color-primary-default: var(--primitive-blue-300);
+  --color-primary-hover: var(--primitive-blue-200);
+  --color-primary-active: var(--primitive-blue-100);
   --color-primary-disabled: var(--primitive-white-100);
 
   /* --- primary FOREGROUND ----------------------------------------
@@ -67,15 +67,15 @@
      fill. Split from the fill ramp because the two move in opposite directions
      in dark mode: the fill stays put so its light label keeps contrast, while
      the foreground has to lighten to stay legible on a dark surface. */
-  --color-primary-fg:        var(--primitive-blue-300);
-  --color-primary-fg-hover:  var(--primitive-blue-200);
+  --color-primary-fg: var(--primitive-blue-300);
+  --color-primary-fg-hover: var(--primitive-blue-200);
   --color-primary-fg-active: var(--primitive-blue-100);
 
   /* --- primary wash (outline/ghost hover+press — NEUTRAL grey) ----
      Hue stays neutral by design. Lightness moved: the old white-200 hover was
      dark enough that a blue label on it hit 2.77:1, and it was also darker
      than the pressed wash, so pressing a button made it look less active. */
-  --color-primary-wash-hover:  var(--primitive-white-400);
+  --color-primary-wash-hover: var(--primitive-white-400);
   --color-primary-wash-active: var(--primitive-white-300);
 
   /* --- feedback FILL ----------------------------------------------
@@ -94,76 +94,85 @@
         Badge labels are 14-16px regular, so the 4.5:1 threshold applies, not 3:1. */
   --color-success-fill: var(--primitive-green-200);
   --color-warning-fill: var(--primitive-yellow-300);
-  --color-error-fill:   var(--primitive-red-300);
+  --color-error-fill: var(--primitive-red-300);
 
   /* Labels ON those fills. Fixed in both modes, no .dark override — see
      --color-text-on-primary for the reasoning. */
   --color-text-on-success: var(--primitive-white-500);
   --color-text-on-warning: var(--primitive-white-500);
-  --color-text-on-error:   var(--primitive-white-500);
+  --color-text-on-error: var(--primitive-white-500);
+
+  /* --- neutral FILL -----------------------------------------------
+     The grey twin of the primary fill: a filled neutral chip that carries a
+     light label (Steps' upcoming node, its unfilled connector). Same rule as
+     the other fills — neither side flips per mode, so both are fixed.
+     black-200 rather than bg-muted (black-100): the light label only reaches
+     3.23:1 on black-100, but 4.97:1 here. */
+  --color-neutral-fill: var(--primitive-black-200);
+  --color-text-on-neutral: var(--primitive-white-500);
 
   /* --- feedback -------------------------------------------------- */
   --color-success-default: var(--primitive-green-300);
-  --color-success-subtle:  var(--primitive-green-400);
-  --color-success-accent:  var(--primitive-green-200);
+  --color-success-subtle: var(--primitive-green-400);
+  --color-success-accent: var(--primitive-green-200);
   --color-warning-default: var(--primitive-yellow-300);
-  --color-warning-subtle:  var(--primitive-yellow-400);
-  --color-warning-accent:  var(--primitive-yellow-200);
-  --color-error-default:   var(--primitive-red-300);
-  --color-error-subtle:    var(--primitive-red-400);
-  --color-error-accent:    var(--primitive-red-200);
+  --color-warning-subtle: var(--primitive-yellow-400);
+  --color-warning-accent: var(--primitive-yellow-200);
+  --color-error-default: var(--primitive-red-300);
+  --color-error-subtle: var(--primitive-red-400);
+  --color-error-accent: var(--primitive-red-200);
 
   /* --- feedback FOREGROUND ---------------------------------------
      Feedback used as a status icon or message sitting on the page surface,
      rather than as a fill. Same split as --color-primary-fg: the *-default
      steps are tuned for dark surfaces (green-300 is 1.20:1 on the light one),
      so a foreground needs its own value that flips per mode. */
-  --color-success-fg:      var(--primitive-green-100);
-  --color-warning-fg:      var(--primitive-yellow-200);
+  --color-success-fg: var(--primitive-green-100);
+  --color-warning-fg: var(--primitive-yellow-200);
   /* red-300 is 4.17:1 here — just under AA for the status message it renders.
      red-200 clears it at 6.54:1. */
-  --color-error-fg:        var(--primitive-red-200);
+  --color-error-fg: var(--primitive-red-200);
 
   /* --- overlay / focus ring -------------------------------------- */
   --color-overlay-default: rgba(1, 9, 22, 0.5);
-  --color-ring-default:    var(--primitive-blue-300);
+  --color-ring-default: var(--primitive-blue-300);
 }
 
 /* --- DARK MODE: only overrides that differ from :root ------------ */
 .dark {
-  --color-bg-default:  var(--primitive-black-500);
-  --color-bg-subtle:   var(--primitive-black-400);
+  --color-bg-default: var(--primitive-black-500);
+  --color-bg-subtle: var(--primitive-black-400);
   /* Same value as light: the Switch thumb flips with bg-default, so this one
      track colour works against both a light and a dark thumb (3.23 / 5.45). */
-  --color-bg-muted:    var(--primitive-black-100);
+  --color-bg-muted: var(--primitive-black-100);
   /* Was white-100, i.e. identical to light mode — a pale slab on a near-black
      page, with text-disabled landing on it at 1.75:1. */
   --color-bg-disabled: var(--primitive-black-400);
 
   --color-surface-default: var(--primitive-black-400);
 
-  --color-text-default:     var(--primitive-white-500);
-  --color-text-subtle:      var(--primitive-white-100);
-  --color-text-muted:       var(--primitive-black-300);
-  --color-text-inactive:    var(--primitive-white-100);
-  --color-text-disabled:    var(--primitive-white-300);
-  --color-text-inverse:     var(--primitive-black-500);
+  --color-text-default: var(--primitive-white-500);
+  --color-text-subtle: var(--primitive-white-100);
+  --color-text-muted: var(--primitive-black-300);
+  --color-text-inactive: var(--primitive-white-100);
+  --color-text-disabled: var(--primitive-white-300);
+  --color-text-inverse: var(--primitive-black-500);
   --color-text-placeholder: var(--primitive-white-100);
-  --color-text-link:        var(--primitive-blue-400);
+  --color-text-link: var(--primitive-blue-400);
 
-  --color-border-default:  var(--primitive-white-200);
-  --color-border-subtle:   var(--primitive-black-200); /* dark: cards get a real border */
+  --color-border-default: var(--primitive-white-200);
+  --color-border-subtle: var(--primitive-black-200); /* dark: cards get a real border */
   --color-border-disabled: var(--primitive-black-200);
   /* Back to the vivid steps here — the darkened light-mode values would be
      near-invisible against the dark surface. */
-  --color-border-success:  var(--primitive-green-400);
-  --color-border-warning:  var(--primitive-yellow-400);
-  --color-border-error:    var(--primitive-red-400);
+  --color-border-success: var(--primitive-green-400);
+  --color-border-warning: var(--primitive-yellow-400);
+  --color-border-error: var(--primitive-red-400);
 
   /* red-300 only reaches 4.22:1 on the dark surface; red-400 makes 7.11:1. */
-  --color-success-fg:      var(--primitive-green-400);
-  --color-warning-fg:      var(--primitive-yellow-400);
-  --color-error-fg:        var(--primitive-red-400);
+  --color-success-fg: var(--primitive-green-400);
+  --color-warning-fg: var(--primitive-yellow-400);
+  --color-error-fg: var(--primitive-red-400);
 
   --color-divider-default: var(--primitive-white-300);
 
@@ -173,13 +182,13 @@
      white-500; blue-500 on the pressed wash would only make 4.41:1.
      NOTE: the primary FILL tokens are deliberately NOT overridden here — the
      fill stays blue in both modes so its light label keeps its contrast. */
-  --color-primary-fg:        var(--primitive-blue-400);
-  --color-primary-fg-hover:  var(--primitive-blue-500);
+  --color-primary-fg: var(--primitive-blue-400);
+  --color-primary-fg-hover: var(--primitive-blue-500);
   --color-primary-fg-active: var(--primitive-white-500);
 
   /* Wash stays neutral grey but moves to the dark end of the ramp — a light
      wash on a dark surface reads as an inverted highlight. */
-  --color-primary-wash-hover:  var(--primitive-black-400);
+  --color-primary-wash-hover: var(--primitive-black-400);
   --color-primary-wash-active: var(--primitive-black-300);
 
   --color-overlay-default: rgba(1, 9, 22, 0.6);

@@ -34,9 +34,9 @@
   ],
   "scripts": {
     "dev": "vite",
-    "build": "tsup && tailwindcss -i ./src/styles/theme.css -o ./dist/styles.css",
+    "build": "tsup && tailwindcss -i ./src/styles/theme.css -o ./dist/styles.css && node scripts/copy-fonts.mjs",
     "build:js": "tsup",
-    "build:css": "tailwindcss -i ./src/styles/theme.css -o ./dist/styles.css",
+    "build:css": "tailwindcss -i ./src/styles/theme.css -o ./dist/styles.css && node scripts/copy-fonts.mjs",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
