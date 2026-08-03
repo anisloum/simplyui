@@ -30,6 +30,7 @@
   --color-bg-default: var(--color-bg-default);
   --color-bg-subtle: var(--color-bg-subtle);
   --color-bg-muted: var(--color-bg-muted);
+  --color-bg-muted-hover: var(--color-bg-muted-hover);
   --color-bg-disabled: var(--color-bg-disabled);
 
   /* surface */
@@ -43,6 +44,9 @@
   --color-text-disabled: var(--color-text-disabled);
   --color-text-inverse: var(--color-text-inverse);
   --color-text-on-primary: var(--color-text-on-primary);
+  --color-text-on-success: var(--color-text-on-success);
+  --color-text-on-warning: var(--color-text-on-warning);
+  --color-text-on-error: var(--color-text-on-error);
   --color-text-placeholder: var(--color-text-placeholder);
   --color-text-link: var(--color-text-link);
 
@@ -82,6 +86,9 @@
   --color-success-fg: var(--color-success-fg);
   --color-warning-fg: var(--color-warning-fg);
   --color-error-fg: var(--color-error-fg);
+  --color-success-fill: var(--color-success-fill);
+  --color-warning-fill: var(--color-warning-fill);
+  --color-error-fill: var(--color-error-fill);
 
   /* overlay + ring */
   --color-overlay-default: var(--color-overlay-default);

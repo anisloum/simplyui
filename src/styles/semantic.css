@@ -10,7 +10,14 @@
   /* --- backgrounds ----------------------------------------------- */
   --color-bg-default:  var(--primitive-white-500);
   --color-bg-subtle:   var(--primitive-white-400);
-  --color-bg-muted:    var(--primitive-white-100);
+  /* Darkened from white-100. This is the Switch's off-track, and the thumb
+     (bg-default) sat on it at 2.31:1 — the thumb position is what tells you the
+     switch is off, so it needs 3:1. black-100 gets it to 3.23:1 and also makes
+     the track edge visible against the page. */
+  --color-bg-muted:    var(--primitive-black-100);
+  /* Hover step for bg-muted (the Switch's off-track). Neutral, one step darker,
+     and still clears 3:1 against the thumb in both modes. */
+  --color-bg-muted-hover: var(--primitive-black-200);
   --color-bg-disabled: var(--primitive-white-300);
 
   /* --- surface (raised: cards, dropdowns, popovers, modals) ------ */
@@ -71,6 +78,30 @@
   --color-primary-wash-hover:  var(--primitive-white-400);
   --color-primary-wash-active: var(--primitive-white-300);
 
+  /* --- feedback FILL ----------------------------------------------
+     What a filled badge/chip paints, paired with the matching --color-text-on-*
+     below. Same split as primary: a fill does NOT flip per mode, so its label
+     must not flip either.
+
+     !! AA STATUS OF THE CURRENT PAIRINGS (measured, light and dark alike,
+        since neither side flips):
+          white-500 on green-200   2.06:1   FAILS  (black-500 would be 8.53:1)
+          white-500 on yellow-300  1.49:1   FAILS  (black-500 would be 11.77:1)
+          white-500 on red-300     4.17:1   FAILS
+        red-300 is the awkward mid-tone where NEITHER a white nor a black label
+        clears 4.5:1 (4.17 and 4.22), so error needs a darker fill regardless —
+        red-200 takes a white label to 6.54:1.
+        Badge labels are 14-16px regular, so the 4.5:1 threshold applies, not 3:1. */
+  --color-success-fill: var(--primitive-green-200);
+  --color-warning-fill: var(--primitive-yellow-300);
+  --color-error-fill:   var(--primitive-red-300);
+
+  /* Labels ON those fills. Fixed in both modes, no .dark override — see
+     --color-text-on-primary for the reasoning. */
+  --color-text-on-success: var(--primitive-white-500);
+  --color-text-on-warning: var(--primitive-white-500);
+  --color-text-on-error:   var(--primitive-white-500);
+
   /* --- feedback -------------------------------------------------- */
   --color-success-default: var(--primitive-green-300);
   --color-success-subtle:  var(--primitive-green-400);
@@ -89,7 +120,9 @@
      so a foreground needs its own value that flips per mode. */
   --color-success-fg:      var(--primitive-green-100);
   --color-warning-fg:      var(--primitive-yellow-200);
-  --color-error-fg:        var(--primitive-red-300);
+  /* red-300 is 4.17:1 here — just under AA for the status message it renders.
+     red-200 clears it at 6.54:1. */
+  --color-error-fg:        var(--primitive-red-200);
 
   /* --- overlay / focus ring -------------------------------------- */
   --color-overlay-default: rgba(1, 9, 22, 0.5);
@@ -100,7 +133,9 @@
 .dark {
   --color-bg-default:  var(--primitive-black-500);
   --color-bg-subtle:   var(--primitive-black-400);
-  --color-bg-muted:    var(--primitive-white-100);
+  /* Same value as light: the Switch thumb flips with bg-default, so this one
+     track colour works against both a light and a dark thumb (3.23 / 5.45). */
+  --color-bg-muted:    var(--primitive-black-100);
   /* Was white-100, i.e. identical to light mode — a pale slab on a near-black
      page, with text-disabled landing on it at 1.75:1. */
   --color-bg-disabled: var(--primitive-black-400);
