@@ -27,8 +27,8 @@ export interface ControlStyleOptions {
  * The bordered box. It is a plain `div`, not the focusable element: the chips'
  * remove buttons and the clear button live inside it, and nesting those in a
  * `role="combobox"` (or a `<button>`) would be a nested-interactive violation.
- * The box therefore takes the ring on `:focus-within` from whichever child has
- * focus.
+ * The box therefore takes the ring via `:has(:focus-visible)` — keyboard focus
+ * on the trigger inside it, not a pointer click.
  */
 export function controlStyles(options: ControlStyleOptions = {}) {
   return cn('flex h-control-md w-full items-center gap-0 px-2', fieldSurface(options))
@@ -38,7 +38,7 @@ export function controlStyles(options: ControlStyleOptions = {}) {
 export const triggerStyles = cn(
   'flex min-w-0 flex-1 cursor-pointer items-center gap-0 self-stretch',
   'bg-transparent text-left text-base font-regular text-text-default',
-  // The ring is drawn by the control wrapper via :focus-within.
+  // The ring is drawn by the control wrapper via :has(:focus-visible).
   'outline-none disabled:cursor-not-allowed disabled:text-text-disabled',
 )
 
@@ -65,14 +65,15 @@ export const chevronOpenStyles = 'rotate-180'
 
 /** Popover surface. `z-dropdown` comes from the token scale. */
 export const listboxStyles = cn(
-  'z-dropdown overflow-y-auto rounded-md border border-border-subtle bg-surface-default py-0 shadow-md',
+  'z-dropdown overflow-y-auto rounded-control border border-border-subtle bg-bg-default py-0 shadow-md',
+  'scrollbar-subtle',
   'outline-none',
 )
 
 export const optionStyles = cn(
   'flex h-[2.5rem] w-full cursor-pointer items-center gap-1 px-2',
   'text-sm font-regular text-text-default',
-  'transition-colors duration-150 ease-out motion-reduce:transition-none',
+  'transition-colors duration-150 ease-out motion-reduce:transition-none hover:bg-bg-subtle',
 )
 
 /** Hover and keyboard-active share one highlight, so the two never disagree. */

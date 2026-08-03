@@ -46,7 +46,9 @@ export function Checkbox({
   )
 
   return (
-    <span className={cn(rootStyles, className)}>
+    // Wrapping the input means the box counts as part of the label, so clicking
+    // anywhere on the row toggles — not just the text.
+    <label htmlFor={checkboxId} className={cn(rootStyles, className)}>
       <input
         {...rest}
         ref={setInputRef}
@@ -65,11 +67,7 @@ export function Checkbox({
         )}
       </span>
 
-      {label != null && label !== false ? (
-        <label htmlFor={checkboxId} className={labelStyles}>
-          {label}
-        </label>
-      ) : null}
-    </span>
+      {label != null && label !== false ? <span className={labelStyles}>{label}</span> : null}
+    </label>
   )
 }

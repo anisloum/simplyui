@@ -113,6 +113,12 @@ export function Select({
 
   const [open, setOpen] = useState(false)
   const [activeIndex, setActiveIndex] = useState(-1)
+  /**
+   * The popover is portalled to `document.body`, which sits outside any `.dark`
+   * wrapper, so the dark token values never reach it by inheritance. Mirror the
+   * trigger's theme onto the portalled node instead.
+   */
+  const [darkContext, setDarkContext] = useState(false)
 
   const isControlled = value !== undefined
   const [uncontrolled, setUncontrolled] = useState<string[]>(() => toArray(defaultValue))
@@ -144,6 +150,7 @@ export function Select({
 
   const openList = useCallback(() => {
     if (disabled) return
+    setDarkContext(controlRef.current?.closest('.dark') != null)
     setOpen(true)
     // Land on the first selection if there is one, else the first enabled row.
     const firstSelected = options.findIndex((o) => selected.includes(o.value) && !o.disabled)
@@ -171,7 +178,9 @@ export function Select({
     open,
     anchorRef: controlRef,
     popoverRef: listboxRef,
-    offset: 4,
+    // 8px rather than 4 — the list reads as a separate surface, not as an
+    // extension of the field.
+    offset: 8,
     preferredMaxHeight: maxVisibleOptions * OPTION_ROW_HEIGHT,
     onDismiss: useCallback(() => {
       setOpen(false)
@@ -293,6 +302,8 @@ export function Select({
               <Badge
                 key={option.value}
                 size="sm"
+                // Matches the 5px corner of the trigger it sits in.
+                shape="rounded"
                 disabled={disabled}
                 onRemove={() => commit(selected.filter((entry) => entry !== option.value))}
                 removeLabel={`Remove ${option.label}`}
@@ -301,7 +312,7 @@ export function Select({
               </Badge>
             ))}
             {overflowCount > 0 ? (
-              <Badge size="sm" variant="outlined" disabled={disabled}>
+              <Badge size="sm" shape="rounded" variant="outlined" disabled={disabled}>
                 {`+${overflowCount}`}
               </Badge>
             ) : null}
@@ -382,7 +393,7 @@ export function Select({
               role="listbox"
               aria-multiselectable={multiple || undefined}
               aria-labelledby={label ? labelId : undefined}
-              className={listboxStyles}
+              className={cn(darkContext && 'dark', listboxStyles)}
               style={{
                 position: 'fixed',
                 top: popover?.top ?? -9999,

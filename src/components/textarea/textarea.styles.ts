@@ -36,7 +36,9 @@ export interface TextareaStyleOptions extends FieldSurfaceOptions {
 
 /**
  * Unlike Input there is no wrapper: the `<textarea>` is itself the bordered
- * box, so it carries the surface directly. `:focus-within` still matches,
+ * box, so it carries the surface directly and takes the ring from its own
+ * `:focus-visible` rather than the wrapper's `:has()`. The old note here said
+ * `:focus-within`, which also fired on pointer clicks.
  * because an element matches it when it has focus itself.
  */
 export function textareaStyles({ resize = 'vertical', ...surface }: TextareaStyleOptions = {}) {

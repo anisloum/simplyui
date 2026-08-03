@@ -97,7 +97,7 @@
 
   /* --- radius (from Button Radius spec + defaults) --------------- */
   --primitive-radius-none: 0;
-  --primitive-radius-control: 5px; /* buttons, inputs, selects  */
+  --primitive-radius-control: 8px; /* buttons, inputs, selects  */
   --primitive-radius-md: 12px;     /* cards, containers, modals */
   --primitive-radius-full: 9999px; /* pills, avatars            */
 

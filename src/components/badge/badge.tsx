@@ -9,11 +9,12 @@ import {
   badgeRemoveStyles,
   badgeStyles,
   type BadgeIntent,
+  type BadgeShape,
   type BadgeSize,
   type BadgeVariant,
 } from './badge.styles'
 
-export type { BadgeIntent, BadgeSize, BadgeVariant }
+export type { BadgeIntent, BadgeShape, BadgeSize, BadgeVariant }
 
 export interface BadgeProps extends ComponentPropsWithRef<'span'> {
   /** Colour intent. @default "primary" */
@@ -22,6 +23,8 @@ export interface BadgeProps extends ComponentPropsWithRef<'span'> {
   variant?: BadgeVariant
   /** Size. @default "md" */
   size?: BadgeSize
+  /** Pill or the 5px control corner. @default "pill" */
+  shape?: BadgeShape
   /** Optional leading icon. Decorative. */
   icon?: ReactNode
   /** Greys the badge out and disables its remove control. @default false */
@@ -43,6 +46,7 @@ export function Badge({
   intent = 'primary',
   variant = 'filled',
   size = 'md',
+  shape = 'pill',
   icon,
   disabled = false,
   onRemove,
@@ -52,7 +56,10 @@ export function Badge({
   ...rest
 }: BadgeProps) {
   return (
-    <span {...rest} className={cn(badgeStyles({ intent, variant, size, disabled }), className)}>
+    <span
+      {...rest}
+      className={cn(badgeStyles({ intent, variant, size, shape, disabled }), className)}
+    >
       {icon ? (
         <span aria-hidden="true" className={cn(badgeIconStyles, badgeIconSizeStyles[size])}>
           {icon}

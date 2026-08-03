@@ -7,7 +7,15 @@ import { cn } from '../../lib/cn'
  * in CSS, so what you see can never drift from what the input reports (native
  * form reset, autofill and label clicks all keep working).
  */
-export const rootStyles = 'inline-flex items-center gap-1'
+/**
+ * The root is the `<label>`, so the whole row — box included — is the click
+ * target. The painted box is only a sibling of the `sr-only` input, so on its
+ * own it would swallow clicks instead of toggling.
+ */
+export const rootStyles = cn(
+  'inline-flex w-fit cursor-pointer items-center gap-1',
+  'has-disabled:cursor-not-allowed',
+)
 
 export const inputStyles = 'peer sr-only'
 
@@ -41,6 +49,6 @@ export const boxStyles = cn(
 export const glyphStyles = 'hidden size-[0.875rem]'
 
 export const labelStyles = cn(
-  'cursor-pointer text-sm font-regular text-text-default',
-  'peer-disabled:cursor-not-allowed peer-disabled:text-text-disabled',
+  'text-sm font-regular text-text-default select-none',
+  'peer-disabled:text-text-disabled',
 )

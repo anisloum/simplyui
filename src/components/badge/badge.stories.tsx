@@ -36,6 +36,7 @@ const meta = {
     intent: { control: 'inline-radio', options: INTENTS },
     variant: { control: 'inline-radio', options: VARIANTS },
     size: { control: 'inline-radio', options: SIZES },
+    shape: { control: 'inline-radio', options: ['pill', 'rounded'] },
     disabled: { control: 'boolean' },
     children: { control: 'text' },
     removeLabel: { control: 'text' },
@@ -76,6 +77,29 @@ export const Variants: Story = {
               {intent}
             </Badge>
           ))}
+        </Row>
+      ))}
+    </div>
+  ),
+}
+
+/** Pill against the 5px control corner — the latter is what Select's chips use. */
+export const Shapes: Story = {
+  render: (args) => (
+    <div className="flex flex-col gap-4">
+      {(['pill', 'rounded'] as const).map((shape) => (
+        <Row key={shape} label={shape}>
+          {INTENTS.map((intent) => (
+            <Badge key={intent} {...args} intent={intent} shape={shape}>
+              {intent}
+            </Badge>
+          ))}
+          <Badge {...args} shape={shape} variant="outlined">
+            outlined
+          </Badge>
+          <Badge {...args} shape={shape} onRemove={() => {}} removeLabel="Remove chip">
+            chip
+          </Badge>
         </Row>
       ))}
     </div>

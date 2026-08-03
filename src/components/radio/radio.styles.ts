@@ -8,8 +8,15 @@ export const groupStyles: Record<RadioOrientation, string> = {
   horizontal: 'flex flex-row flex-wrap gap-3',
 }
 
-/** Same peer trick as Checkbox: a real radio input, only visually replaced. */
-export const rootStyles = 'inline-flex items-center gap-1'
+/**
+ * Same peer trick as Checkbox: a real radio input, only visually replaced.
+ * The root is the `<label>` so the circle is part of the click target — as a
+ * bare sibling of the `sr-only` input it would swallow clicks instead.
+ */
+export const rootStyles = cn(
+  'inline-flex w-fit cursor-pointer items-center gap-1',
+  'has-disabled:cursor-not-allowed',
+)
 
 export const inputStyles = 'peer sr-only'
 
@@ -36,6 +43,6 @@ export const circleStyles = cn(
 export const dotStyles = 'hidden size-[0.625rem] rounded-full bg-primary-fg'
 
 export const labelStyles = cn(
-  'cursor-pointer text-sm font-regular text-text-default',
-  'peer-disabled:cursor-not-allowed peer-disabled:text-text-disabled',
+  'text-sm font-regular text-text-default select-none',
+  'peer-disabled:text-text-disabled',
 )

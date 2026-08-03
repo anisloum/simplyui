@@ -36,7 +36,9 @@ export function Radio({
   const resolvedChecked = checked ?? (group ? group.value === value : undefined)
 
   return (
-    <span className={cn(rootStyles, className)}>
+    // Wrapping the input makes the circle part of the label, so the whole row
+    // is clickable rather than just the text.
+    <label htmlFor={radioId} className={cn(rootStyles, className)}>
       <input
         {...rest}
         type="radio"
@@ -56,11 +58,7 @@ export function Radio({
         <span data-slot="dot" className={dotStyles} />
       </span>
 
-      {label != null && label !== false ? (
-        <label htmlFor={radioId} className={labelStyles}>
-          {label}
-        </label>
-      ) : null}
-    </span>
+      {label != null && label !== false ? <span className={labelStyles}>{label}</span> : null}
+    </label>
   )
 }

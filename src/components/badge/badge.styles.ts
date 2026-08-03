@@ -3,12 +3,23 @@ import { cn } from '../../lib/cn'
 export type BadgeIntent = 'primary' | 'success' | 'warning' | 'error'
 export type BadgeVariant = 'filled' | 'outlined'
 export type BadgeSize = 'sm' | 'md'
+export type BadgeShape = 'pill' | 'rounded'
 
 const base = cn(
-  'inline-flex max-w-full items-center gap-0 rounded-full border font-medium',
+  'inline-flex max-w-full items-center gap-0 border font-medium',
   'transition-[color,background-color,border-color] duration-150 ease-out',
   'motion-reduce:transition-none',
 )
+
+/**
+ * `rounded` reuses `radius-control` (5px) — the same corner as Button, Input
+ * and the Select trigger — so chips sitting inside a Select read as part of the
+ * field rather than as loose pills.
+ */
+const shapeStyles: Record<BadgeShape, string> = {
+  pill: 'rounded-full',
+  rounded: 'rounded-control',
+}
 
 /**
  * Heights are 20/28px, which are off the spacing scale, so they are set as
@@ -56,6 +67,7 @@ export interface BadgeStyleOptions {
   intent?: BadgeIntent
   variant?: BadgeVariant
   size?: BadgeSize
+  shape?: BadgeShape
   disabled?: boolean
 }
 
@@ -63,12 +75,14 @@ export function badgeStyles({
   intent = 'primary',
   variant = 'filled',
   size = 'md',
+  shape = 'pill',
   disabled = false,
 }: BadgeStyleOptions = {}) {
   return cn(
     base,
     variant === 'filled' ? filledStyles[intent] : outlinedStyles[intent],
     sizeStyles[size],
+    shapeStyles[shape],
     disabled && disabledStyles[variant],
     // After the size classes: Tailwind's `text-*` utilities carry a
     // line-height, and tailwind-merge drops any `leading-*` placed before one.

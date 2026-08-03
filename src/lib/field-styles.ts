@@ -39,18 +39,24 @@ export const statusForegroundStyles: Record<FieldValidationStatus, string> = {
 }
 
 /**
- * Border, background and focus ring for the bordered control.
+ * Keyboard-only focus, in two halves because the surface sits in two different
+ * places: `:focus-visible` for when it IS the focusable element (Textarea), and
+ * `:has(:focus-visible)` for when it wraps one (Input, Select trigger). Only
+ * one of the pair can ever match, so they never fight.
  *
- * The ring is on `:focus-within` rather than `:focus-visible`: these are text
- * fields, so a pointer click should show focus too. It works whether this sits
- * on the focusable element itself (Textarea) or on a wrapper around it (Input),
- * because an element matches `:focus-within` when it *or* a descendant has
- * focus.
+ * Deliberately not `:focus-within`, which also fires for pointer clicks — that
+ * put a ring on every field the moment you clicked into it.
  */
+const focusRingStyles = cn(
+  'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring-default',
+  'has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-ring-default',
+)
+
+/** Border, background and focus ring for the bordered control. */
 export const fieldSurfaceStyles = cn(
   'rounded-control border bg-bg-default',
   'transition-[color,background-color,border-color] duration-150 ease-out',
-  'focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-ring-default',
+  focusRingStyles,
   'motion-reduce:transition-none',
 )
 
@@ -60,7 +66,8 @@ export const fieldSurfaceStyles = cn(
  * on top, rather than turning blue and dropping the error signal.
  */
 export const statusBorderStyles: Record<FieldStatus, string> = {
-  default: 'border-border-default focus-within:border-border-focused',
+  default:
+    'border-border-default focus-visible:border-border-focused has-focus-visible:border-border-focused',
   success: 'border-border-success',
   warning: 'border-border-warning',
   error: 'border-border-error',
@@ -71,7 +78,7 @@ export const statusBorderStyles: Record<FieldStatus, string> = {
  * wrapper `div` has no `:disabled` of its own to hook a variant onto.
  */
 export const disabledSurfaceStyles =
-  'border-border-disabled bg-bg-disabled focus-within:border-border-disabled'
+  'border-border-disabled bg-bg-disabled has-focus-visible:border-border-disabled'
 
 /** Helper text is neutral; a status message takes the status colour. */
 export function messageStyles(status: FieldStatus, isStatusMessage: boolean) {

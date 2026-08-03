@@ -38,7 +38,9 @@ export function Switch({
   const switchId = id ?? generatedId
 
   return (
-    <span className={cn(rootStyles[labelPosition], className)}>
+    // Wrapping the input makes the track part of the label, so clicking the
+    // switch itself toggles — not just the text beside it.
+    <label htmlFor={switchId} className={cn(rootStyles[labelPosition], className)}>
       <input
         {...rest}
         type="checkbox"
@@ -52,11 +54,7 @@ export function Switch({
         <span data-slot="thumb" className={thumbStyles} />
       </span>
 
-      {label != null && label !== false ? (
-        <label htmlFor={switchId} className={labelStyles}>
-          {label}
-        </label>
-      ) : null}
-    </span>
+      {label != null && label !== false ? <span className={labelStyles}>{label}</span> : null}
+    </label>
   )
 }

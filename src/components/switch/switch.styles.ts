@@ -7,9 +7,18 @@ export type SwitchLabelPosition = 'left' | 'right'
  * input → track → label, which matters: Tailwind's `peer-*` compiles to a
  * following-sibling combinator, so the input has to come first either way.
  */
+const rootBase = cn(
+  'inline-flex w-fit cursor-pointer items-center gap-1',
+  'has-disabled:cursor-not-allowed',
+)
+
+/**
+ * The root is the `<label>`, so the track itself is part of the click target —
+ * as a bare sibling of the `sr-only` input it would swallow clicks.
+ */
 export const rootStyles: Record<SwitchLabelPosition, string> = {
-  right: 'inline-flex items-center gap-1',
-  left: 'inline-flex flex-row-reverse items-center gap-1',
+  right: rootBase,
+  left: cn(rootBase, 'flex-row-reverse'),
 }
 
 /** Same peer approach as Checkbox: a real checkbox input, visually replaced. */
@@ -46,6 +55,6 @@ export const thumbStyles = cn(
 )
 
 export const labelStyles = cn(
-  'cursor-pointer text-sm font-regular text-text-default',
-  'peer-disabled:cursor-not-allowed peer-disabled:text-text-disabled',
+  'text-sm font-regular text-text-default select-none',
+  'peer-disabled:text-text-disabled',
 )

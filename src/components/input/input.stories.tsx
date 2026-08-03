@@ -82,7 +82,7 @@ export const BaseStates: Story = {
       <Input {...args} label="Default" />
       <Input
         {...args}
-        label="Focused — click or tab in; the ring is on :focus-within"
+        label="Focused — Tab in to see the ring; clicking deliberately shows none"
         placeholder="focus me"
       />
       <Input {...args} label="Filled" defaultValue="ada@example.com" />
