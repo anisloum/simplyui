@@ -68,6 +68,7 @@ export const listboxStyles = cn(
   'z-dropdown overflow-y-auto rounded-control border border-border-subtle bg-bg-default py-0 shadow-md',
   'scrollbar-subtle',
   'outline-none',
+  'animate-dropdown',
 )
 
 export const optionStyles = cn(
