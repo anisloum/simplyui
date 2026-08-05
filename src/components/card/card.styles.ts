@@ -19,8 +19,8 @@ const base = cn(
  * variant or mode never shifts the box by a pixel.
  */
 const variantStyles: Record<CardVariant, string> = {
-  elevated: 'border-transparent bg-surface-default shadow-md dark:border-border-subtle',
-  outlined: 'border-border-default bg-surface-default',
+  elevated: 'border-transparent bg-bg-default shadow-sm dark:border-border-subtle',
+  outlined: 'border-border-default bg-bg-default',
   // `bg-subtle`, never `bg-muted`: bg-muted is a mid grey (black-100), and
   // `text-default` on it is only 3.23:1 in dark mode.
   filled: 'border-transparent bg-bg-subtle',
