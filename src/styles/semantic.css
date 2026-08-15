@@ -25,6 +25,7 @@
 
   /* --- text (muted/subtle FIXED: subtle darker, muted lighter) --- */
   --color-text-default: var(--primitive-black-500);
+  --color-text-less-prominent: var(--primitive-black-400);
   /* subtle is body copy (helper text), so it needs the full 4.5:1. white-100
      is lighter than the surface here and only managed 2.31:1. */
   --color-text-subtle: var(--primitive-black-200);
@@ -152,6 +153,7 @@
   --color-surface-default: var(--primitive-black-400);
 
   --color-text-default: var(--primitive-white-500);
+  --color-text-less-prominent: var(--primitive-white-400);
   --color-text-subtle: var(--primitive-white-100);
   --color-text-muted: var(--primitive-black-300);
   --color-text-inactive: var(--primitive-white-100);

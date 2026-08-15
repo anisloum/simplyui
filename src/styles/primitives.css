@@ -97,8 +97,9 @@
 
   /* --- radius (from Button Radius spec + defaults) --------------- */
   --primitive-radius-none: 0;
-  --primitive-radius-control: 8px; /* buttons, inputs, selects  */
-  --primitive-radius-md: 12px; /* cards, containers, modals */
+  --primitive-radius-control: 5px; /* buttons  */
+  --primitive-radius-sm: 8px; /* inputs, selects  */
+  --primitive-radius-md: 10px; /* cards, containers, modals */
   --primitive-radius-full: 9999px; /* pills, avatars            */
 
   /* --- sizing (control heights from Button Scale) --------------- */
@@ -111,11 +112,11 @@
 
   /* --- shadow (dual drop-shadow, from spec) --------------------- */
   --primitive-shadow-none: none;
-  --primitive-shadow-sm: -1px -1px 4px 1px rgba(1, 9, 22, 0.1), 1px 1px 4px 1px rgba(1, 9, 22, 0.1);
+  --primitive-shadow-sm: -1px -1px 4px 1px rgba(1, 9, 22, 0.05), 1px 1px 4px 1px rgba(1, 9, 22, 0.05);
   --primitive-shadow-md:
-    -2px -2px 8px 1.5px rgba(1, 9, 22, 0.12), 2px 2px 8px 1.5px rgba(1, 9, 22, 0.12);
+    -2px -2px 8px 1.5px rgba(1, 9, 22, 0.06), 2px 2px 8px 1.5px rgba(1, 9, 22, 0.06);
   --primitive-shadow-lg:
-    -3px -3px 12px 2px rgba(1, 9, 22, 0.14), 3px 3px 12px 2px rgba(1, 9, 22, 0.14);
+    -3px -3px 12px 2px rgba(1, 9, 22, 0.07), 3px 3px 12px 2px rgba(1, 9, 22, 0.07);
 
   /* --- z-index (engineering stack) ------------------------------ */
   --primitive-z-dropdown: 1000;

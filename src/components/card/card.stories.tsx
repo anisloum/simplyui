@@ -31,7 +31,7 @@ function ChartPlaceholder({ height = 160 }: { height?: number }) {
       role="img"
       aria-label="Chart placeholder"
       style={{ height }}
-      className="flex w-full items-end justify-around gap-2 rounded-control bg-bg-subtle p-2"
+      className="flex w-full items-end justify-around gap-2 rounded-control p-2"
     >
       {[45, 30, 100, 62, 55].map((value, index) => (
         <span

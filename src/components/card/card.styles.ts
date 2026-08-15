@@ -40,7 +40,7 @@ const paddingStyles: Record<CardPadding, string> = {
 
 /** One elevation step up on hover, plus the usual keyboard-only ring. */
 const interactiveStyles: Record<CardVariant, string> = {
-  elevated: 'hover:shadow-lg',
+  elevated: 'hover:shadow-md',
   outlined: 'hover:shadow-sm dark:hover:border-border-default',
   filled: 'hover:shadow-sm',
   ghost: 'hover:bg-bg-subtle',
@@ -79,7 +79,7 @@ export const headerTitleGroupStyles = 'flex min-w-0 flex-col gap-0'
 
 export const titleRowStyles = 'flex items-center gap-0'
 
-export const titleStyles = 'text-md font-bold text-text-default'
+export const titleStyles = 'text-md font-bold text-text-less-prominent'
 
 export const descriptionStyles = 'text-sm text-text-subtle'
 

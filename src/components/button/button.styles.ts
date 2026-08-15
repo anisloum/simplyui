@@ -71,9 +71,9 @@ export const disabledStyles: Record<ButtonVariant, string> = {
  * spacing scale starts at 4px, so `py-0` is 4px and `px-2` is 12px.
  */
 const sizeStyles: Record<ButtonSize, string> = {
-  sm: 'h-control-sm gap-0 px-2 py-0 text-sm',
-  md: 'h-control-md gap-0 px-4 py-1 text-base',
-  lg: 'h-control-lg gap-1 px-5 py-1 text-lg',
+  sm: 'h-control-sm gap-0 px-1 py-0 text-sm',
+  md: 'h-control-base gap-0 px-3 py-1 text-base',
+  lg: 'h-control-base gap-1 px-5 py-2 text-lg',
 }
 
 /** Icon-only geometry: square, side == the control height for that size. */

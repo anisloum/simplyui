@@ -39,6 +39,7 @@
 
   /* text */
   --color-text-default: var(--color-text-default);
+  --color-text-less-prominent: var(--color-text-less-prominent);
   --color-text-subtle: var(--color-text-subtle);
   --color-text-muted: var(--color-text-muted);
   --color-text-inactive: var(--color-text-inactive);
@@ -156,6 +157,7 @@
      ----------------------------------------------------------------- */
   --radius-none: var(--primitive-radius-none);
   --radius-control: var(--primitive-radius-control);
+  --radius-sm: var(--primitive-radius-sm);
   --radius-md: var(--primitive-radius-md);
   --radius-full: var(--primitive-radius-full);
 

@@ -51,7 +51,7 @@ export const adornmentStyles =
 /** The password reveal control — a real button, so it gets its own focus ring. */
 export const toggleStyles = cn(
   adornmentStyles,
-  'rounded-control text-text-subtle',
+  'text-text-subtle',
   'cursor-pointer disabled:cursor-not-allowed disabled:text-text-disabled',
   'focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-ring-default',
 )
