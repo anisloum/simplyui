@@ -4,7 +4,7 @@ export const listStyles = 'flex flex-wrap items-center gap-0'
 
 /** Square 40px cell, matching the icon buttons beside it. */
 const cellBase = cn(
-  'inline-flex size-[2.5rem] shrink-0 items-center justify-center rounded-control',
+  'inline-flex size-[1.5rem] shrink-0 items-center justify-center rounded-control',
   'text-sm font-medium',
   'transition-colors duration-150 ease-out motion-reduce:transition-none',
   'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring-default',

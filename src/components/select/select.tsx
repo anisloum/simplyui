@@ -27,7 +27,7 @@ import {
   type SelectStatus,
   type SelectValidationStatus,
 } from './select.styles'
-import { usePopover } from './use-popover'
+import { usePopover } from '../../lib/use-popover'
 
 export type { SelectStatus, SelectValidationStatus }
 

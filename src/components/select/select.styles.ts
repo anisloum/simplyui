@@ -65,14 +65,14 @@ export const chevronOpenStyles = 'rotate-180'
 
 /** Popover surface. `z-dropdown` comes from the token scale. */
 export const listboxStyles = cn(
-  'z-dropdown overflow-y-auto rounded-control border border-border-subtle bg-bg-default py-0 shadow-md',
+  'z-dropdown px-[0.5rem] py-[0.5rem] overflow-y-auto rounded-md border border-border-subtle bg-bg-default shadow-md',
   'scrollbar-subtle',
   'outline-none',
   'animate-dropdown',
 )
 
 export const optionStyles = cn(
-  'flex h-[2.5rem] w-full cursor-pointer items-center gap-1 px-2',
+  'flex h-[2.5rem] rounded-sm w-full cursor-pointer items-center gap-1 px-2',
   'text-sm font-regular text-text-default',
   'transition-colors duration-150 ease-out motion-reduce:transition-none hover:bg-bg-subtle',
 )

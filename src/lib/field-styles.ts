@@ -54,7 +54,7 @@ const focusRingStyles = cn(
 
 /** Border, background and focus ring for the bordered control. */
 export const fieldSurfaceStyles = cn(
-  'rounded-control border bg-bg-default',
+  'rounded-sm border bg-bg-default',
   'transition-[color,background-color,border-color] duration-150 ease-out',
   focusRingStyles,
   'motion-reduce:transition-none',

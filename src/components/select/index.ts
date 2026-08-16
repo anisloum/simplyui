@@ -10,4 +10,4 @@ export {
   type PopoverPlacement,
   type PopoverPosition,
   type UsePopoverOptions,
-} from './use-popover'
+} from '../../lib/use-popover'
