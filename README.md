@@ -5,8 +5,9 @@ Accessible, themeable React components built from scratch — no Radix, no React
 Distributed two ways: as an installable npm package, and (later) via a CLI that copies
 component source directly into your project.
 
-> **Status: scaffolding only.** There are no components, no design tokens and no theme
-> values yet. The build, lint, type-check and Storybook pipelines are wired up and green.
+> **Status: in development.** The token layer is in place and components are landing
+> incrementally — see Storybook for what currently exists. The build, lint, type-check and
+> Storybook pipelines are wired up and green.
 
 ---
 
@@ -114,6 +115,33 @@ Target is **WCAG AA**.
 - `eslint-plugin-jsx-a11y` runs over all JSX.
 - `@storybook/addon-a11y` runs axe-core against every story and is configured to **error**
   on violations, not warn — see `.storybook/preview.ts`.
+
+## Sidebar: persisting collapse state
+
+`Sidebar` never writes to `localStorage` itself — storage is not available in every
+environment it can render in (SSR, React Native Web, sandboxed iframes), and a component
+that reaches for it directly cannot be rendered safely on a server. Collapse state is a
+normal controlled prop, so persistence is a few lines in the consuming app:
+
+```tsx
+const [collapsed, setCollapsed] = useState(
+  () => globalThis.localStorage?.getItem('sidebar:collapsed') === 'true',
+)
+
+<Sidebar
+  collapsed={collapsed}
+  onCollapsedChange={(next) => {
+    setCollapsed(next)
+    globalThis.localStorage?.setItem('sidebar:collapsed', String(next))
+  }}
+>
+```
+
+For SSR, read the value from a cookie during rendering instead, so the first paint already
+has the right width and the sidebar does not visibly snap after hydration.
+
+The mobile off-canvas state (`mobileOpen` / `onMobileOpenChange`) works the same way, but
+should generally _not_ be persisted — a drawer that reopens itself on load is a bug.
 
 ## Planned phases
 

@@ -112,7 +112,8 @@
 
   /* --- shadow (dual drop-shadow, from spec) --------------------- */
   --primitive-shadow-none: none;
-  --primitive-shadow-sm: -1px -1px 4px 1px rgba(1, 9, 22, 0.05), 1px 1px 4px 1px rgba(1, 9, 22, 0.05);
+  --primitive-shadow-sm:
+    -1px -1px 4px 1px rgba(1, 9, 22, 0.05), 1px 1px 4px 1px rgba(1, 9, 22, 0.05);
   --primitive-shadow-md:
     -2px -2px 8px 1.5px rgba(1, 9, 22, 0.06), 2px 2px 8px 1.5px rgba(1, 9, 22, 0.06);
   --primitive-shadow-lg:
@@ -141,13 +142,44 @@
   }
 }
 
+/* Modal-surface entrances: the dimmed backdrop fades, the panel it belongs to
+   slides in from the left edge. Used by Sidebar's mobile off-canvas panel, and
+   by any Drawer that follows. */
+@keyframes overlay-open {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes panel-slide-left {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
 @layer utilities {
   .animate-dropdown {
     animation: dropdown-open 150ms cubic-bezier(0.16, 1, 0.3, 1) both;
   }
 
+  .animate-overlay {
+    animation: overlay-open 200ms ease-out both;
+  }
+
+  .animate-panel-left {
+    animation: panel-slide-left 200ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
   @media (prefers-reduced-motion: reduce) {
-    .animate-dropdown {
+    .animate-dropdown,
+    .animate-overlay,
+    .animate-panel-left {
       animation: none;
     }
   }

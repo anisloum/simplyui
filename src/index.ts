@@ -8,6 +8,8 @@
 // Shared utilities
 export { cn, type ClassValue } from './lib/cn'
 export { Slot, type SlotProps } from './lib/slot'
+export { useDismissableLayer, type UseDismissableLayerOptions } from './lib/use-dismissable-layer'
+export { useMediaQuery } from './lib/use-media-query'
 
 // Components
 export {
@@ -54,13 +56,6 @@ export {
   type PaginationRangeOptions,
 } from './components/pagination'
 export {
-  Steps,
-  type Step,
-  type StepsOrientation,
-  type StepsProps,
-  type StepStatus,
-} from './components/steps'
-export {
   Tab,
   TabList,
   TabPanel,
@@ -71,6 +66,20 @@ export {
   type TabsProps,
   type TabsVariant,
 } from './components/tabs'
+export {
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarGroup,
+  SidebarHeader,
+  SidebarItem,
+  type SidebarContentProps,
+  type SidebarFooterProps,
+  type SidebarGroupProps,
+  type SidebarHeaderProps,
+  type SidebarItemProps,
+  type SidebarProps,
+} from './components/sidebar'
 export {
   Radio,
   RadioGroup,

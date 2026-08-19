@@ -1,18 +1,18 @@
 import { cn } from '../../lib/cn'
 
 export const contentStyles = cn(
-  'flex flex-col items-center z-dropdown overflow-y-auto rounded-md px-[0.5rem] bg-bg-default py-1 shadow-md',
-  'scrollbar-subtle outline-none animate-dropdown min-w-[10rem]',
+  'z-dropdown flex flex-col items-center overflow-y-auto rounded-md border border-border-subtle bg-bg-default px-[0.5rem] py-1 shadow-md',
+  'animate-dropdown min-w-[10rem] scrollbar-subtle outline-none',
 )
 
 export type MenuItemVariant = 'default' | 'destructive'
 
 export function itemStyles({ variant = 'default' }: { variant?: MenuItemVariant } = {}) {
   return cn(
-    'flex h-[2.5rem] rounded-sm w-full select-none items-center gap-2 px-3 outline-none',
-    'text-sm font-medium transition-colors duration-150 ease-out motion-reduce:transition-none cursor-pointer',
+    'flex h-[2.5rem] w-full items-center gap-2 rounded-sm px-3 outline-none select-none',
+    'cursor-pointer text-sm font-medium transition-colors duration-150 ease-out motion-reduce:transition-none',
     variant === 'destructive'
-      ? 'text-error-subtle hover:text-bg-default hover:bg-error-subtle focus-visible:bg-error-subtle focus-visible:text-bg-default'
+      ? 'text-error-subtle hover:bg-error-subtle hover:text-bg-default focus-visible:bg-error-subtle focus-visible:text-bg-default'
       : 'text-text-default hover:bg-bg-subtle focus-visible:bg-bg-subtle',
     'disabled:cursor-not-allowed disabled:text-text-disabled disabled:hover:bg-transparent',
   )

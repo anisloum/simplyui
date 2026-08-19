@@ -51,7 +51,13 @@ export interface MenuProps extends Omit<ButtonProps, 'children'> {
   icon?: ReactNode
 }
 
-export function Menu({ children, open: controlledOpen, onOpenChange, icon, ...buttonProps }: MenuProps) {
+export function Menu({
+  children,
+  open: controlledOpen,
+  onOpenChange,
+  icon,
+  ...buttonProps
+}: MenuProps) {
   const [uncontrolledOpen, setUncontrolledOpen] = useState(false)
   const isControlled = controlledOpen !== undefined
   const open = isControlled ? controlledOpen : uncontrolledOpen
@@ -72,7 +78,13 @@ export function Menu({ children, open: controlledOpen, onOpenChange, icon, ...bu
   return (
     <MenuContext.Provider value={{ open, setOpen, anchorRef, menuId, triggerId }}>
       <MenuTrigger asChild>
-        <Button className={cn(buttonProps.className, menuButtonStyles)} variant="ghost" iconOnly icon={icon} {...buttonProps} />
+        <Button
+          className={cn(buttonProps.className, menuButtonStyles)}
+          variant="ghost"
+          iconOnly
+          icon={icon}
+          {...buttonProps}
+        />
       </MenuTrigger>
       <MenuContent>{children}</MenuContent>
     </MenuContext.Provider>

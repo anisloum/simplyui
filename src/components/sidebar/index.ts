@@ -1,0 +1,6 @@
+export { Sidebar, type SidebarProps } from './sidebar'
+export { SidebarContent, type SidebarContentProps } from './sidebar-content'
+export { SidebarFooter, type SidebarFooterProps } from './sidebar-footer'
+export { SidebarGroup, type SidebarGroupProps } from './sidebar-group'
+export { SidebarHeader, type SidebarHeaderProps } from './sidebar-header'
+export { SidebarItem, type SidebarItemProps } from './sidebar-item'
