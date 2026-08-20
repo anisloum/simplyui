@@ -13,7 +13,6 @@ import {
 } from 'lucide-react'
 import { useState, type ReactNode } from 'react'
 
-import logoFull from '../../assets/logo/simplyui-logo-full.svg'
 import logoIcon from '../../assets/logo/simplyui-logo-icon.svg'
 import { Sidebar } from './sidebar'
 import { SidebarContent } from './sidebar-content'
@@ -23,8 +22,7 @@ import { SidebarHeader } from './sidebar-header'
 import { SidebarItem } from './sidebar-item'
 
 /** The brand mark, as a consumer would pass it — the component ships no asset. */
-const BrandLogo = () => <img src={logoFull} alt="SimplyUI" className="h-8 w-auto" />
-const BrandMark = () => <img src={logoIcon} alt="SimplyUI" className="h-7 w-auto" />
+const BrandMark = () => <img src={logoIcon} alt="SimplyUI" className="size-7" />
 
 const GENERAL = [
   { label: 'Dashboard', icon: <LayoutDashboard /> },
@@ -57,7 +55,7 @@ function Frame({ children, dark = false }: { children: ReactNode; dark?: boolean
 function Nav({ active = 'Dashboard' }: { active?: string }) {
   return (
     <>
-      <SidebarHeader logo={<BrandLogo />} logoCollapsed={<BrandMark />} />
+      <SidebarHeader logo={<BrandMark />} logoCollapsed={<BrandMark />} />
       <SidebarContent>
         <SidebarGroup label="General">
           {GENERAL.map((item) => (
@@ -173,7 +171,7 @@ export const ItemStates: Story = {
   render: () => (
     <Frame>
       <Sidebar expandedWidth="280px">
-        <SidebarHeader logo={<BrandLogo />} logoCollapsed={<BrandMark />} />
+        <SidebarHeader logo={<BrandMark />} logoCollapsed={<BrandMark />} />
         <SidebarContent>
           <SidebarGroup label="States">
             <SidebarItem href="#" icon={<LayoutDashboard />} label="Default — hover me" />
@@ -195,7 +193,7 @@ export const PinnedFooter: Story = {
   render: () => (
     <Frame>
       <Sidebar expandedWidth="280px">
-        <SidebarHeader logo={<BrandLogo />} logoCollapsed={<BrandMark />} />
+        <SidebarHeader logo={<BrandMark />} logoCollapsed={<BrandMark />} />
         <SidebarContent>
           <SidebarGroup label="General">
             <SidebarItem href="#" icon={<LayoutDashboard />} label="Dashboard" active />
@@ -260,7 +258,7 @@ export const RouterLinks: Story = {
     return (
       <Frame>
         <Sidebar expandedWidth="280px">
-          <SidebarHeader logo={<BrandLogo />} logoCollapsed={<BrandMark />} />
+          <SidebarHeader logo={<BrandMark />} logoCollapsed={<BrandMark />} />
           <SidebarContent>
             <SidebarGroup label="General">
               <SidebarItem asChild icon={<LayoutDashboard />} label="Dashboard" active>
