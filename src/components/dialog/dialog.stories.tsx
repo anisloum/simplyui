@@ -134,7 +134,7 @@ export const FormDialog: Story = {
         <DialogTrigger asChild>
           <Button>Add new product</Button>
         </DialogTrigger>
-        <DialogContent {...args} size="lg">
+        <DialogContent {...args} size="xl">
           <DialogHeader>
             <DialogTitle>Add new product</DialogTitle>
           </DialogHeader>

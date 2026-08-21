@@ -32,7 +32,7 @@ const sizeStyles: Record<DialogSize, string> = {
 export function contentStyles({ size = 'md' }: { size?: DialogSize } = {}) {
   return cn(
     'relative flex max-h-[85vh] w-full flex-col overflow-hidden',
-    'rounded-md border border-border-subtle bg-surface-default shadow-lg',
+    'rounded-md border border-border-subtle bg-bg-default shadow-lg',
     'outline-none',
     sizeStyles[size],
     'animate-dialog',

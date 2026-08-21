@@ -15,8 +15,8 @@ import { cn } from '../../lib/cn'
  * even on a light page where the surface and the canvas are close in value.
  */
 export const rootStyles = cn(
-  'flex h-[calc(100%-40px)] min-h-0 m-[20px] p-[10px] flex-col overflow-hidden',
-  'border border-border-subtle rounded-sm bg-bg-default',
+  'm-[20px] flex h-[calc(100%-40px)] min-h-0 flex-col overflow-hidden p-[10px]',
+  'rounded-sm border border-border-subtle bg-bg-default',
   'transition-[width] duration-200 ease-out motion-reduce:transition-none',
 )
 

@@ -2,7 +2,7 @@ import { cn } from '../../lib/cn'
 
 export const contentStyles = cn(
   'z-dropdown flex flex-col items-center overflow-y-auto rounded-md border border-border-subtle bg-bg-default px-[0.5rem] py-1 shadow-md',
-  'animate-dropdown min-w-[10rem] scrollbar-subtle outline-none',
+  'animate-dropdown scrollbar-subtle min-w-[10rem] outline-none',
 )
 
 export type MenuItemVariant = 'default' | 'destructive'

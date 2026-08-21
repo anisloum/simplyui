@@ -192,22 +192,40 @@
    flush against the container instead.
    `scrollbar-width`/`scrollbar-color` cover Firefox; the `::-webkit-*` rules
    cover Chrome and Safari. */
-@utility scrollbar-subtle {
-  scrollbar-width: thin;
-  scrollbar-color: var(--color-border-default) transparent;
-}
+/* Slim, inset, rounded scrollbar for anything that scrolls inside a bordered
+   surface — Table, Select's listbox, Menu, Dialog's body.
 
-/* Webkit scrollbar chrome for .scrollbar-subtle (Select listbox, popovers, etc.)
-   These ::-webkit-* pseudo-element rules MUST live outside @utility because
-   Tailwind v4 does not expand nested & selectors inside @utility blocks.
-   A plain @layer rule is emitted verbatim and picked up correctly. */
+   IMPORTANT — the two styling systems are mutually exclusive, not additive.
+   Chromium supports both `scrollbar-width`/`scrollbar-color` and the
+   `::-webkit-scrollbar` pseudo-elements, but the moment `scrollbar-width` is
+   set it ignores every `::-webkit-*` rule and draws its own thin native bar.
+   Declaring both therefore silently throws away all of the styling below. So
+   the standard properties are fenced behind `@supports not selector(...)`,
+   which is true only where the pseudo-elements are unavailable (Firefox).
+
+   These rules live in `@layer components` rather than `@utility` because
+   Tailwind v4 does not expand nested `&` selectors inside an `@utility` block;
+   a plain layer rule is emitted verbatim. */
 @layer components {
-  .scrollbar-subtle::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
+  /* Firefox: the standard properties are all it has. No radius or inset. */
+  @supports not selector(::-webkit-scrollbar) {
+    .scrollbar-subtle {
+      scrollbar-width: thin;
+      scrollbar-color: var(--color-border-default) transparent;
+    }
   }
 
-  /* Remove the up/down step-button arrows from the scrollbar track. */
+  /* Chromium / WebKit: a 6px fully-rounded thumb floating 4px inside the
+     container, on an invisible track, with no step arrows. The inset comes from
+     a transparent border plus `background-clip: content-box` — a thumb drawn
+     flush to the edge reads as browser chrome bolted onto the panel instead of
+     as part of it. */
+  .scrollbar-subtle::-webkit-scrollbar {
+    width: 14px;
+    height: 14px;
+  }
+
+  /* Drop the up/down step arrows. */
   .scrollbar-subtle::-webkit-scrollbar-button {
     display: none;
     height: 0;
@@ -218,11 +236,19 @@
     background: transparent;
   }
 
+  /* Where a vertical and a horizontal bar meet — left unpainted so the corner
+     is not a grey notch. */
+  .scrollbar-subtle::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+
   .scrollbar-subtle::-webkit-scrollbar-thumb {
     background-color: var(--color-border-default);
     background-clip: content-box;
-    border: 3px solid transparent;
+    border: 4px solid transparent;
     border-radius: var(--radius-full);
+    /* Keeps the thumb a grabbable bar on long lists rather than a dot. */
+    min-height: 2rem;
   }
 
   .scrollbar-subtle::-webkit-scrollbar-thumb:hover {

@@ -46,6 +46,7 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@tanstack/react-table": "9.1.2",
     "clsx": "2.1.1",
     "lucide-react": "^1.28.0",
     "tailwind-merge": "3.6.0"
