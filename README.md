@@ -8,6 +8,12 @@ Tailwind to use them.
 
 ---
 
+## Documentation
+
+Live component explorer: https://simplyui-storybook.vercel.app
+
+---
+
 ## Install
 
 ```bash
