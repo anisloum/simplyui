@@ -47,7 +47,7 @@ export function Slot({ children, ...slotProps }: SlotProps) {
   if (!isValidElement(children)) {
     if (process.env.NODE_ENV !== 'production' && children != null) {
       console.warn(
-        '[simplyui] `asChild` expects a single React element child. Received something else, so nothing was rendered.',
+        '[@simply-ui/react] `asChild` expects a single React element child. Received something else, so nothing was rendered.',
       )
     }
     return null

@@ -16,6 +16,7 @@ export {
   Badge,
   type BadgeIntent,
   type BadgeProps,
+  type BadgeShape,
   type BadgeSize,
   type BadgeVariant,
 } from './components/badge'
@@ -130,6 +131,19 @@ export {
   type TableProps,
   type TableRowProps,
 } from './components/table'
+export {
+  Menu,
+  MenuContent,
+  MenuItem,
+  MenuSeparator,
+  MenuTrigger,
+  type MenuContentProps,
+  type MenuItemProps,
+  type MenuItemVariant,
+  type MenuProps,
+  type MenuSeparatorProps,
+  type MenuTriggerProps,
+} from './components/menu'
 export {
   Sidebar,
   SidebarContent,

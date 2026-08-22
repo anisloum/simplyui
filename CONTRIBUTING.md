@@ -93,3 +93,103 @@ component by hand.
 ## Commit checks
 
 There is no pre-commit hook yet. Run lint, typecheck and build yourself.
+
+## Versioning policy
+
+Releases are driven by [Changesets](https://github.com/changesets/changesets). Any
+pull request that changes what a consumer can see ships a changeset alongside the
+code:
+
+```bash
+pnpm changeset
+```
+
+We are on **0.x**, so the API may still break. While the major stays `0`, the
+_minor_ carries breaking changes and the _patch_ carries everything else — that is
+what `0.x` means in semver, and it is why "breaking" below maps to a minor bump.
+`1.0.0` will be the signal that the API is stable.
+
+### Which bump
+
+| Change                                                               | 0.x bump       | After 1.0 |
+| -------------------------------------------------------------------- | -------------- | --------- |
+| Rename or remove a prop                                              | **minor**      | major     |
+| Change a prop's type, or its default, in a way existing code notices | **minor**      | major     |
+| Remove or rename an export                                           | **minor**      | major     |
+| Rename a CSS custom property consumers theme with (`--color-*`)      | **minor**      | major     |
+| Change the DOM structure or ARIA roles a consumer may depend on      | **minor**      | major     |
+| Add a new component or a new export                                  | patch          | minor     |
+| Add a new **optional** prop                                          | patch          | minor     |
+| Add a token, or a new value to an existing variant union             | patch          | minor     |
+| Visual/style fix inside a component                                  | patch          | patch     |
+| Accessibility fix that does not change the API                       | patch          | patch     |
+| Bug fix                                                              | patch          | patch     |
+| Docs, tests, CI, refactors with no consumer-visible effect           | _no changeset_ | —         |
+
+### Judgement calls
+
+- **A default that changes is breaking.** Consumers who never passed the prop still
+  get different output.
+- **Tightening a type is breaking; widening it is not.** Going from `string` to a
+  union rejects code that used to compile.
+- **A visual fix is a patch even if it looks different**, unless the change moves
+  layout enough to break a consumer's surrounding composition — then treat it as
+  breaking and say so in the changeset.
+- **Token renames are breaking.** `--color-*` is the public theming API; anyone
+  overriding a variable you rename loses their override silently.
+- When two readings are defensible, take the larger bump. An over-cautious minor
+  costs nothing; a surprise break costs trust.
+
+### Writing the changeset
+
+Write for someone reading the changelog to decide whether to upgrade — not for a
+reviewer of the diff:
+
+> `Button`'s `iconOnly` now requires an accessible name; passing neither
+> `aria-label` nor `aria-labelledby` logs a development warning.
+
+not
+
+> refactor button warning logic
+
+## Toolchain
+
+Dev dependencies are pinned exactly (no ranges) so the toolchain is reproducible. Two pins
+are deliberately **not** the latest published version:
+
+- **TypeScript `6.0.3`, not `7.0.2`.** TS 7 (the native Go port) is `latest` on npm, but
+  `typescript-eslint@8.65` still declares its peer as `typescript >=4.8.4 <6.1.0`. Pinning
+  6.0.3 keeps type-aware linting working. Revisit once typescript-eslint ships TS 7 support.
+- **ESLint `9.39.5`, not `10.8.0`.** `eslint-plugin-jsx-a11y@6.10.2` declares support only
+  up to ESLint `^9`. Since a11y linting is central to the WCAG AA target, the plugin wins.
+
+Runtime `dependencies` use caret ranges instead, so consumers can dedupe them.
+
+**tsup over Vite lib mode** for the package build: it is purpose-built for libraries and
+handles ESM + CJS + `.d.ts` in one pass, which leaves Vite doing only what it is good at
+here — the dev server and Storybook.
+
+`tsconfig.build.json` sets `"ignoreDeprecations": "6.0"` because tsup's declaration worker
+injects the TS6-deprecated `baseUrl`. It is scoped to the build config and can go once
+tsup stops doing that.
+
+## The build pipeline
+
+`pnpm build` runs three steps, in order:
+
+1. **`tsup`** — ESM + CJS bundles and `.d.ts`, with React external.
+2. **Tailwind CLI** — compiles `src/styles/theme.css` into `dist/styles.css`.
+3. **`scripts/rewrite-theme-namespaces.mjs`** — renames Tailwind-reserved theme
+   namespaces in the _compiled_ stylesheet to `--simply-ui-*`. Without this, a consumer
+   who imports `styles.css` inherits our spacing/type/radius scale for their own
+   utilities, and `p-0` silently renders as 4px. `--color-*` is deliberately left alone:
+   those names do not exist in Tailwind's default theme, so they add utilities rather than
+   redefining any, and they are the public theming API.
+4. **`scripts/copy-styles.mjs`** — stages the fonts and the raw token layers, and rewrites
+   `@source` in the shipped `theme.css` to point at the built bundles (Tailwind's content
+   auto-detection skips `node_modules`, so without this the raw path would generate no
+   utilities at all).
+
+Both scripts fail the build rather than emit a subtly broken artifact. If you change
+`src/styles/theme.css`, re-run `pnpm build` and check `dist/styles.css` still declares no
+bare `--spacing-*` / `--text-*` / `--radius-*` / `--shadow-*` / `--font-*`.

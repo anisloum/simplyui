@@ -1,9 +1,27 @@
 {
-  "name": "simplyui",
-  "version": "0.0.0",
-  "private": false,
-  "description": "A well-crafted, accessible, themeable React component library.",
+  "name": "@simply-ui/react",
+  "version": "0.1.0",
+  "description": "Accessible, themeable React components built from scratch — no Radix, no React Aria.",
+  "keywords": [
+    "react",
+    "components",
+    "ui",
+    "design-system",
+    "tailwind",
+    "tailwindcss",
+    "accessible",
+    "wcag",
+    "typescript"
+  ],
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anisloum/simplyui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/anisloum/simplyui/issues"
+  },
+  "homepage": "https://github.com/anisloum/simplyui#readme",
   "type": "module",
   "sideEffects": [
     "**/*.css"
@@ -23,39 +41,46 @@
       }
     },
     "./styles.css": "./dist/styles.css",
-    "./tokens.css": "./src/styles/tokens.css",
+    "./theme.css": "./dist/theme.css",
+    "./primitives.css": "./dist/primitives.css",
+    "./semantic.css": "./dist/semantic.css",
+    "./fonts.css": "./dist/fonts.css",
     "./package.json": "./package.json"
   },
   "files": [
     "dist",
-    "src/styles",
     "README.md",
     "LICENSE"
   ],
   "scripts": {
     "dev": "vite",
-    "build": "tsup && tailwindcss -i ./src/styles/theme.css -o ./dist/styles.css && node scripts/copy-fonts.mjs",
+    "build": "tsup && tailwindcss -i ./src/styles/theme.css -o ./dist/styles.css && node scripts/rewrite-theme-namespaces.mjs && node scripts/copy-styles.mjs",
     "build:js": "tsup",
-    "build:css": "tailwindcss -i ./src/styles/theme.css -o ./dist/styles.css && node scripts/copy-fonts.mjs",
+    "build:css": "tailwindcss -i ./src/styles/theme.css -o ./dist/styles.css && node scripts/rewrite-theme-namespaces.mjs && node scripts/copy-styles.mjs",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "prepublishOnly": "npm run build",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "release": "changeset publish"
   },
   "dependencies": {
-    "@tanstack/react-table": "9.1.2",
-    "clsx": "2.1.1",
+    "@tanstack/react-table": "^9.1.2",
+    "clsx": "^2.1.1",
     "lucide-react": "^1.28.0",
-    "tailwind-merge": "3.6.0"
+    "tailwind-merge": "^3.6.0"
   },
   "peerDependencies": {
     "react": "^18.3.0 || ^19.0.0",
     "react-dom": "^18.3.0 || ^19.0.0"
   },
   "devDependencies": {
+    "@changesets/cli": "3.0.1",
     "@eslint/js": "9.39.5",
     "@storybook/addon-a11y": "10.5.5",
     "@storybook/addon-docs": "10.5.5",
@@ -85,7 +110,11 @@
     "vite": "8.2.0"
   },
   "engines": {
-    "node": ">=20.19.0"
+    "node": ">=18"
   },
-  "packageManager": "pnpm@11.18.0"
+  "publishConfig": {
+    "access": "public"
+  },
+  "packageManager": "pnpm@11.18.0",
+  "private": false
 }

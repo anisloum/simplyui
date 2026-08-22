@@ -37,3 +37,8 @@ coverage/
 
 # Specification
 specification/
+# npm pack output
+*.tgz
+
+# this repo uses pnpm; an npm lockfile here is a hazard
+package-lock.json

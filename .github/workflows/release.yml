@@ -1,0 +1,86 @@
+name: Release
+
+on:
+  push:
+    branches: [main]
+
+# Two publishes racing would be worse than a slow queue, so never cancel: let
+# an in-flight release finish before the next one starts.
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  release:
+    name: Version PR or publish
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    permissions:
+      # Push the "Version Packages" branch and update CHANGELOG.md.
+      contents: write
+      # Open that branch as a pull request.
+      pull-requests: write
+      # Required for npm provenance (`--provenance`), which signs the published
+      # tarball against this workflow run.
+      id-token: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Changesets needs history to work out what has already been released.
+          fetch-depth: 0
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          # Writes the registry into .npmrc so NODE_AUTH_TOKEN is picked up.
+          registry-url: https://registry.npmjs.org
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      # The release path must clear the same bar as a PR. CI runs these too, but
+      # this job can start from a commit whose CI has not finished, so re-run
+      # them rather than publish on trust.
+      - name: Verify
+        run: |
+          pnpm run lint
+          pnpm run typecheck
+          pnpm run build
+
+      # Two modes, decided by whether any changesets are pending:
+      #   - pending changesets  -> open/update the "Version Packages" PR
+      #   - none pending        -> the version PR was just merged, so publish
+      # `publish` is what makes the second mode happen; without it the action
+      # only ever opens PRs.
+      - name: Create version PR or publish
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          version: pnpm run version-packages
+          publish: pnpm run release
+          commit: 'chore: version packages'
+          title: 'chore: version packages'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Repository secret. An npm **automation** token — a classic or
+          # granular token will be rejected by 2FA-enforced publishes.
+          # This workflow never creates or echoes it.
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_CONFIG_PROVENANCE: true
+
+      - name: Report
+        if: always()
+        run: |
+          if [ "${{ steps.changesets.outputs.published }}" = "true" ]; then
+            echo "Published: ${{ steps.changesets.outputs.publishedPackages }}" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "No publish this run — either a version PR is open, or there was nothing to release." >> "$GITHUB_STEP_SUMMARY"
+          fi

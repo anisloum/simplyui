@@ -48,7 +48,7 @@ function useAccessibleNameWarning(iconOnly: boolean, hasName: boolean): void {
     if (process.env.NODE_ENV === 'production') return
     if (iconOnly && !hasName) {
       console.warn(
-        '[simplyui] <Button iconOnly> renders no visible text, so it needs an accessible name. Pass `aria-label` (or `aria-labelledby`).',
+        '[@simply-ui/react] <Button iconOnly> renders no visible text, so it needs an accessible name. Pass `aria-label` (or `aria-labelledby`).',
       )
     }
   }, [iconOnly, hasName])

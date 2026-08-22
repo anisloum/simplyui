@@ -1,0 +1,63 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+# A new push to a PR makes the in-flight run pointless; cancel it rather than
+# paying for both. `main` runs are never cancelled — they gate the release.
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Lint, typecheck, build
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # Reads the `packageManager` field, so the pnpm version can never drift
+      # from the one the lockfile was written with.
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      # `--frozen-lockfile` fails rather than silently resolving new versions,
+      # which is the whole point of committing a lockfile.
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint
+        run: pnpm run lint
+
+      - name: Check formatting
+        run: pnpm run format:check
+
+      - name: Typecheck
+        run: pnpm run typecheck
+
+      - name: Build package
+        run: pnpm run build
+
+      # Proves nothing in the library depends on a dev-only path, and that the
+      # stories still compile against the public API.
+      - name: Build Storybook
+        run: pnpm run build-storybook
+
+      # Catches a broken `exports` map, a missing file, or types that do not
+      # resolve — before a publish makes it permanent.
+      - name: Validate package metadata
+        run: pnpm dlx publint@latest --pack npm
+
+      - name: Validate type resolution
+        run: pnpm dlx @arethetypeswrong/cli@latest --pack --ignore-rules cjs-resolves-to-esm
