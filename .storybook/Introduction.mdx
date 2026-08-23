@@ -4,23 +4,90 @@ import { Meta } from '@storybook/addon-docs/blocks'
 
 # SimplyUI
 
-Accessible, themeable React primitives built from scratch — no Radix, no React Aria.
+Accessible, themeable React components built from scratch — no Radix, no React Aria. Styled with Tailwind CSS v4 tokens, and shipped with a compiled stylesheet so Tailwind is not required.
 
-This page exists so Storybook has something to render while the library is still
-scaffolding. **It is not a component.** Delete it once real stories land.
+SimplyUI is designed to be highly customizable, lightweight, and fully accessible right out of the box.
 
-## Status
+---
 
-Scaffolding only. No components, no tokens, no theme values yet.
+## Key Features
 
-- `src/components/` — empty, awaiting component specs
-- `src/styles/tokens.css` — empty, awaiting design tokens
-- `src/styles/theme.css` — Tailwind entry, `@theme inline` mapping is a TODO
+- **Accessibility First**: Shipped with built-in support for keyboard navigation, screen readers, and focus management. Automated `axe-core` accessibility checks are run against every story to ensure WCAG AA compliance.
+- **Modern Styling**: Styled using Tailwind CSS v4's modern styling tokens, compiled into a single clean stylesheet.
+- **Highly Customizable**: Design tokens are mapped to CSS variables, making it trivial to customize colors, spacing, and typography, or implement bespoke themes.
+- **No Third-Party Primitives**: Built from scratch using native HTML elements, avoiding heavy external primitive dependencies.
 
-## Conventions
+---
 
-Every component ships a `*.stories.tsx` file next to its source. Stories are
-picked up from `src/**/*.stories.tsx`. The a11y addon runs axe-core against each
-story and is configured to **error** on violations — see `.storybook/preview.ts`.
+## Installation
 
-See `CONTRIBUTING.md` for the folder layout and how to add a component.
+To start using SimplyUI in your React project, install the package:
+
+```bash
+npm install @simply-ui/react
+```
+
+### Import Stylesheet
+
+Import the compiled stylesheet at your application's entry point (e.g., `main.tsx`, `index.tsx`, or `app/layout.tsx`):
+
+```tsx
+import '@simply-ui/react/styles.css'
+```
+
+> **Using Tailwind in your app?** Read the styling documentation in `README.md` before importing, to ensure design token compatibility.
+
+---
+
+## Quick Start
+
+Here is a quick example of how to import and use components in your application:
+
+```tsx
+import { Button, Card, CardBody, CardHeader, CardTitle } from '@simply-ui/react'
+
+export default function App() {
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>Welcome to SimplyUI</CardTitle>
+      </CardHeader>
+      <CardBody>
+        <Button onClick={() => alert('Hello SimplyUI!')}>Get Started</Button>
+      </CardBody>
+    </Card>
+  )
+}
+```
+
+---
+
+## Dark Mode Support
+
+Every SimplyUI token has a built-in dark theme counterpart. Simply add the `dark` class to a parent element (typically `<html>`) to toggle dark mode across the entire tree:
+
+```tsx
+// Toggle dark mode programmatically
+document.documentElement.classList.toggle('dark', isDark)
+```
+
+You can also scope dark mode to a specific section of your page:
+
+```tsx
+<div className="dark">
+  <Button>Dark Theme Button</Button>
+</div>
+```
+
+---
+
+## Component Explorer
+
+Use the sidebar on the left to explore interactive previews and detailed documentation for each component, including:
+
+- **Inputs**: `Button`, `Checkbox`, `Input`, `Radio`, `Select`, `Switch`, `Textarea`
+- **Navigation**: `Breadcrumbs`, `Pagination`, `Sidebar`, `Tabs`
+- **Data Display**: `Badge`, `Card`, `Table`
+- **Overlays**: `Dialog`, `Menu`
+
+Use the **Controls** panel under any story to experiment with component props in real time, and switch between light and dark previews using the toolbar.
