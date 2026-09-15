@@ -60,4 +60,4 @@ jobs:
         run: pnpm dlx publint@latest --pack npm
 
       - name: Validate type resolution
-        run: pnpm dlx @arethetypeswrong/cli@latest --pack --ignore-rules cjs-resolves-to-esm
+        run: pnpm dlx @arethetypeswrong/cli@latest --pack --ignore-rules cjs-resolves-to-esm --exclude-entrypoints ./styles.css ./theme.css ./primitives.css ./semantic.css ./fonts.css
