@@ -1,5 +1,7 @@
-# Single-package repo — this file exists only because pnpm 11 moved its
-# settings here out of package.json. No `packages:` key on purpose.
+# Single-package repo.
+packages:
+  - .
+
 allowBuilds:
   # Optional native file watcher; Storybook falls back to polling without it.
   '@parcel/watcher': false
