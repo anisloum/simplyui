@@ -114,3 +114,7 @@ in `table.styles.ts` — swap them when the component lands.
 Both use `scrollbar-none` deliberately (the tab rail is its own affordance; a 14px bar
 inside the sidebar's 72px collapsed rail would eat a fifth of its width). Revisit if the
 inconsistency with `scrollbar-subtle` elsewhere starts to show.
+
+### Dropdown and Modal z-index
+
+z-index is managed by a single global scale, so stacking is correct only when layers open in the "expected" order. A dropdown inside a modal works (raised above it), but the global bump means a dropdown could theoretically paint above a modal it doesn't belong to. Proper fix: scope stacking per portal/layer via use-dismissable-layer rather than global z values.

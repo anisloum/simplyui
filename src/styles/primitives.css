@@ -120,11 +120,11 @@
     -3px -3px 12px 2px rgba(1, 9, 22, 0.07), 3px 3px 12px 2px rgba(1, 9, 22, 0.07);
 
   /* --- z-index (engineering stack) ------------------------------ */
-  --primitive-z-dropdown: 1000;
   --primitive-z-sticky: 1100;
   --primitive-z-modal: 1300;
-  --primitive-z-toast: 1400;
-  --primitive-z-tooltip: 1500;
+  --primitive-z-dropdown: 1400;
+  --primitive-z-toast: 1500;
+  --primitive-z-tooltip: 1600;
 }
 
 /* =====================================================================
